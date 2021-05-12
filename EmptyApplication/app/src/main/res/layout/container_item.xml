@@ -37,15 +37,10 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/modificarAnimal"
+                    android:id="@+id/verDetalle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Editar"></Button>
-                <Button
-                    android:id="@+id/eliminarAnimal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Eliminar"></Button>
+                    android:text="Ver detalle"></Button>
             </LinearLayout>
 
         </LinearLayout>

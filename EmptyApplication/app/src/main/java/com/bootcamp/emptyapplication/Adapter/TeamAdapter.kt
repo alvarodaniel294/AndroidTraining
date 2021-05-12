@@ -29,13 +29,13 @@ class TeamAdapter(val listOfTeams: MutableList<Team>, val listener: TeamListener
 
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
         val item = listOfTeams[position]
+        holder.name.text = item.name
+        Picasso.get()
+            .load(item.image)
+            .resize(100, 100)
+            .centerCrop()
+            .into(holder.image)
 
-    }
-
-    private fun eliminarAnimal(team: Team) {
-        listOfTeams.remove(team)
-        this.notifyItemRemoved(listOfTeams.indexOf(team));
-        this.notifyItemRangeChanged(listOfTeams.indexOf(team), listOfTeams.size);
     }
 
     override fun getItemCount(): Int {
@@ -43,5 +43,9 @@ class TeamAdapter(val listOfTeams: MutableList<Team>, val listener: TeamListener
     }
 
     class TeamViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+
+        val name: TextView = v.findViewById(R.id.name)
+        val image: ImageView = v.findViewById(R.id.imageView)
+        val verDetalle: Button = v.findViewById(R.id.verDetalle)
     }
 }
