@@ -4,12 +4,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bootcamp.emptyapplication.PokemonListener
 import com.bootcamp.emptyapplication.databinding.PokemonContainerBinding
 import com.bootcamp.emptyapplication.models.Pokemon
 import com.squareup.picasso.Picasso
 import java.lang.Exception
 
-class PokemonAdapter(var pokemonList: MutableList<Pokemon>): RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() {
+class PokemonAdapter(var pokemonList: MutableList<Pokemon>,
+                     val listener: PokemonListener): RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() {
 
     class PokemonViewHolder(container: PokemonContainerBinding): RecyclerView.ViewHolder(container.root) {
         val binding: PokemonContainerBinding = container
@@ -36,6 +38,9 @@ class PokemonAdapter(var pokemonList: MutableList<Pokemon>): RecyclerView.Adapte
                     Log.d("IMAGE ERROR", e.toString())
                 }
             })
+        holder.binding.cardView.setOnClickListener {
+            listener.viewPokemonDetail(pokemon)
+        }
 
     }
 
