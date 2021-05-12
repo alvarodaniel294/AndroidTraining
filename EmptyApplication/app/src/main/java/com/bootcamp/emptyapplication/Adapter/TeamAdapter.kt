@@ -15,7 +15,7 @@ import com.bootcamp.emptyapplication.Models.Team
 import com.bootcamp.emptyapplication.R
 import com.squareup.picasso.Picasso
 
-class TeamAdapter(val listOfTeams: MutableList<TeamAdapter>, val listener: TeamListener): RecyclerView.Adapter<TeamAdapter.TeamViewHolder>() {
+class TeamAdapter(val listOfTeams: MutableList<Team>, val listener: TeamListener): RecyclerView.Adapter<TeamAdapter.TeamViewHolder>() {
 
     lateinit var context: Context
 
