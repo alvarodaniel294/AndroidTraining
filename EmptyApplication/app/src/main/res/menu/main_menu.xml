@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/listFragment"
+        app:showAsAction="always"
+        android:title="@string/list"
+        android:icon="@drawable/ic_list"/>
+    <item
+        android:id="@+id/profileFragment"
+        app:showAsAction="always"
+        android:title="@string/profile"
+        android:icon="@drawable/ic_profile"/>
+    <item
+        android:id="@+id/settingsFragment"
+        app:showAsAction="always"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_settings"/>
+</menu>
