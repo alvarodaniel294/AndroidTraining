@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">EmptyApplication</string>
+    <string name="secondary_text" />
 </resources>
