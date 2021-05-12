@@ -2,6 +2,7 @@ package com.bootcamp.emptyapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bootcamp.emptyapplication.Adapter.TeamAdapter
 import com.bootcamp.emptyapplication.Interfaces.TeamListener
@@ -24,6 +25,10 @@ class MainActivity : AppCompatActivity(), TeamListener {
 
         recycler.layoutManager = layoutManager
         recycler.adapter = adapter
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            Toast.makeText(this, "refreshing", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onDeleteTeamTap(team: Team) {
