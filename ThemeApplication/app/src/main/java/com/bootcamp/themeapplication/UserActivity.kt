@@ -5,15 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 
-class MainActivity : AppCompatActivity() {
+class UserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_fromMaterial)
+
+
+
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_user)
 
 
-        val button = findViewById<Button>(R.id.gotouser)
+        val button  = findViewById<Button>(R.id.gotodetail)
         button.setOnClickListener {
-            startActivity(Intent(this, UserActivity::class.java))
+            startActivity(Intent(this, detailActivity::class.java))
         }
     }
 }
