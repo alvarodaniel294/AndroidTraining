@@ -1,0 +1,2 @@
+rootProject.name = "ThemeApplication"
+include ':app'
