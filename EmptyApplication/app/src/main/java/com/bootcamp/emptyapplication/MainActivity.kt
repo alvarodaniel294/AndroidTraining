@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.fragment)
         bottomNav.setupWithNavController(navController)
         // iniciando mi recyclerView
-        initRecycler()
+        //initRecycler()
     }
 
     fun initRecycler(){
