@@ -1,21 +1,17 @@
-package com.bootcamp.emptyapplication
+package com.bootcamp.emptyapplication.adapters
 
+import android.content.Context
+import android.content.Intent
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-
-import com.bootcamp.emptyapplication.placeholder.PlaceholderContent.PlaceholderItem
+import com.bootcamp.emptyapplication.Details
+import com.bootcamp.emptyapplication.models.Item
 import com.bootcamp.emptyapplication.databinding.FragmentItemBinding
+import com.squareup.picasso.Picasso
 
-/**
- * [RecyclerView.Adapter] that can display a [PlaceholderItem].
- * TODO: Replace the implementation with code for your data type.
- */
 class MyItemRecyclerViewAdapter(
-    private val values: List<PlaceholderItem>
+    private val values: List<Item>
 ) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,7 +21,7 @@ class MyItemRecyclerViewAdapter(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ), parent.context
         )
 
     }
@@ -37,12 +33,13 @@ class MyItemRecyclerViewAdapter(
 
     override fun getItemCount(): Int = values.size
 
-    inner class ViewHolder(binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        val idView: TextView = binding.title
-        val imageView: ImageView = binding.imageView
-
-        fun show(item: PlaceholderItem) {
-            idView.text =
+    inner class ViewHolder(private val binding: FragmentItemBinding, var context: Context) : RecyclerView.ViewHolder(binding.root) {
+        fun show(item: Item) {
+            binding.title.text = item.title
+            Picasso.get().load(item.imageUrl).into(binding.imageView)
+            binding.card.setOnClickListener {
+                context.startActivity(Intent(context, Details::class.java).putExtra("item", item))
+            }
         }
     }
 
