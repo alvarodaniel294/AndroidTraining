@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:title="Recycler" />
-    <item android:title="Item 2" />
-    <item android:title="Item 3" />
+    <item
+        android:id="@+id/recyclerItem"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="Recycler"
+        />
+    <item
+        android:id="@+id/secondItem"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="Item 2" />
+    <item
+        android:id="@+id/thirdItem"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="Item 3" />
 </menu>
