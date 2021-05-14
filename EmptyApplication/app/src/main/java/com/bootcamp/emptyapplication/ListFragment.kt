@@ -44,15 +44,15 @@ class ListFragment : Fragment(), PokemonListener {
 
     private fun addNewPokemon() {
         pokemonList.clear()
-        pokemonList.add(Pokemon("Chicorita", "152", "90", "100"))
-        pokemonList.add(Pokemon("Bayleef", "153", "120", "100"))
-        pokemonList.add(Pokemon("Meganium", "154", "60", "100"))
-        pokemonList.add(Pokemon("Cyndaquil", "155", "60", "100"))
-        pokemonList.add(Pokemon("Quilava", "156", "60", "100"))
-        pokemonList.add(Pokemon("Typhlosion", "157", "60", "100"))
-        pokemonList.add(Pokemon("Totodile", "158", "60", "100"))
-        pokemonList.add(Pokemon("Croconaw", "159", "60", "100"))
-        pokemonList.add(Pokemon("Feraligatr", "160", "60", "100"))
+        pokemonList.add(Pokemon("Chicorita", "152", "55", "70"))
+        pokemonList.add(Pokemon("Bayleef", "153", "100", "100"))
+        pokemonList.add(Pokemon("Meganium", "154", "150", "150"))
+        pokemonList.add(Pokemon("Cyndaquil", "155", "75", "90"))
+        pokemonList.add(Pokemon("Quilava", "156", "105", "135"))
+        pokemonList.add(Pokemon("Typhlosion", "157", "175", "165"))
+        pokemonList.add(Pokemon("Totodile", "158", "75", "80"))
+        pokemonList.add(Pokemon("Croconaw", "159", "120", "125"))
+        pokemonList.add(Pokemon("Feraligatr", "160", "180", "165"))
         adapter.notifyDataSetChanged()
     }
 
