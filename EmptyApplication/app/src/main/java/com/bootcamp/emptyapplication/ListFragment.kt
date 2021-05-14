@@ -59,6 +59,10 @@ class ListFragment : Fragment(), PokemonListener {
     override fun viewPokemonDetail(pokemon: Pokemon) {
         val navController = findNavController()
         val bundle = Bundle()
+        bundle.putString(DetailFragment.POKEMONNAME, pokemon.name)
+        bundle.putString(DetailFragment.POKEMOIMAGEID, pokemon.id)
+        bundle.putString(DetailFragment.POKEMONWEIGHT, pokemon.weight)
+        bundle.putString(DetailFragment.POKEMONHEIGHT, pokemon.height)
         navController.navigate(R.id.action_listFragment_to_detailFragment, bundle)
     }
 }

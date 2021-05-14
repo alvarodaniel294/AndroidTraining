@@ -1,34 +1,23 @@
 package com.bootcamp.emptyapplication
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import com.squareup.picasso.Picasso
+import java.lang.Exception
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DetailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    companion object {
+        const val POKEMONNAME = "pokemonName"
+        const val POKEMOIMAGEID = "pokemonImageId"
+        const val POKEMONWEIGHT = "pokemonWeight"
+        const val POKEMONHEIGHT = "pokemonHeight"
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,23 +26,32 @@ class DetailFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_detail, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DetailFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DetailFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val name: String? = arguments?.getString(POKEMONNAME)?: "Pokemon"
+        val imageId: String? = arguments?.getString(POKEMOIMAGEID)?: "1"
+        val weight: String? = arguments?.getString(POKEMONWEIGHT)?: "0"
+        val height: String? = arguments?.getString(POKEMONHEIGHT)?: "0"
+
+        val nameLabel = view.findViewById<TextView>(R.id.name)
+        val posterImageView = view.findViewById<ImageView>(R.id.posterImageView)
+        val weightLabel = view.findViewById<TextView>(R.id.weight)
+        val heightLabel = view.findViewById<TextView>(R.id.height)
+        nameLabel.text = "Name: $name"
+        weightLabel.text = "Weight: $weight lb"
+        heightLabel.text = "Height: $height ft"
+        val imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${imageId}.png"
+        Picasso
+            .get()
+            .load(imageUrl)
+            .into(posterImageView, object: com.squareup.picasso.Callback {
+                override fun onSuccess() {
+                    Log.d("IMAGE SUCCESS", "Success")
                 }
-            }
+                override fun onError(e: Exception?) {
+                    Log.d("IMAGE ERROR", e.toString())
+                }
+            })
     }
 }
