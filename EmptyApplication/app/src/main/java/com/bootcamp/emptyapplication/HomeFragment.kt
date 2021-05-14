@@ -19,10 +19,10 @@ class   HomeFragment : Fragment(), IDogDetail{
     var dogs = mutableListOf<String>(
             "https://images.dog.ceo/breeds/hound-basset/n02088238_9626.jpg",
             "https://images.dog.ceo/breeds/mexicanhairless/n02113978_2425.jpg",
-            "https://images.dog.ceo/breeds/terrier-yorkshire/n02094433_4028.jpg",
+            "https://images.dog.ceo/breeds/elkhound-norwegian/n02091467_6962.jpg",
             "https://images.dog.ceo/breeds/hound-basset/n02088238_9626.jpg",
-            "https://images.dog.ceo/breeds/mexicanhairless/n02113978_2425.jpg",
-            "https://images.dog.ceo/breeds/terrier-yorkshire/n02094433_4028.jpg")
+            "https://images.dog.ceo/breeds/setter-english/n02100735_4.jpg",
+            "https://images.dog.ceo/breeds/groenendael/n02105056_7285.jpg")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
