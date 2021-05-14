@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -53,8 +54,18 @@ class   HomeFragment : Fragment(), IDogDetail{
         }
     }
     override fun didSelectImage(image: String) {
-        Log.d("chris","se presiono la imagen :D")
-        Toast.makeText(HomeFragment().context, "hola",Toast.LENGTH_SHORT).show()
+        Log.d("chris","se presiono la imagen :D ${image}")
+        val navController = findNavController()
+        val bundle = Bundle()
+        bundle.putString("myDogImageUrl",image)
+        navController.navigate(R.id.action_homeFragment_to_detailFragment,bundle)
+        // cuando ocupar esto ??
+//        Fragment fragment = new tasks();
+//        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.content_frame, fragment);
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
     }
 
 }
