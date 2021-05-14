@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-//import com.android.example.usersrv.databinding.ItemUserBinding
+import com.bootcamp.emptyapplication.databinding.ItemUserBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 
@@ -25,7 +25,7 @@ class UserAdapter(private val users: List<User>): RecyclerView.Adapter<UserAdapt
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val user = users.get(position)
         with(holder){
-            bindings.tvName.text = user.name
+            bindings.Name.text = user.name
             Glide.with(context)
                 .load(user.url)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
