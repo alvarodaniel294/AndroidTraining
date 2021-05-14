@@ -24,7 +24,6 @@ class PokemonAdapter(var pokemonList: MutableList<Pokemon>,
     }
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
-        Log.d("ADAPTER", position.toString())
         val pokemon = pokemonList[position]
         val imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png"
         Picasso
@@ -38,6 +37,7 @@ class PokemonAdapter(var pokemonList: MutableList<Pokemon>,
                     Log.d("IMAGE ERROR", e.toString())
                 }
             })
+        holder.binding.pokemonName.text = pokemon.name
         holder.binding.cardView.setOnClickListener {
             listener.viewPokemonDetail(pokemon)
         }
