@@ -10,8 +10,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.bootcamp.emptyapplication.Interfaces.IDogDetail
 
-class   HomeFragment : Fragment() {
+class   HomeFragment : Fragment(), IDogDetail{
 
     lateinit var recyclerAdapter: DogAdapter
     var dogs = mutableListOf<String>(
@@ -33,7 +34,7 @@ class   HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val rv_RecycleView: RecyclerView = view.findViewById(R.id.rv_dogs)
         rv_RecycleView.layoutManager = LinearLayoutManager(parentFragment?.context) //HomeFragment().context
-        recyclerAdapter = DogAdapter(dogs)
+        recyclerAdapter = DogAdapter(dogs,this)
         rv_RecycleView.adapter = recyclerAdapter
         recyclerAdapter.notifyDataSetChanged()
         initSwipeRefresher(view)
@@ -51,9 +52,9 @@ class   HomeFragment : Fragment() {
             swipeRefreshLayout.isRefreshing = false
         }
     }
-
-    fun didSelectImage(){
-
+    override fun didSelectImage(image: String) {
+        Log.d("chris","se presiono la imagen :D")
+        Toast.makeText(HomeFragment().context, "hola",Toast.LENGTH_SHORT).show()
     }
 
 }

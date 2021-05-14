@@ -5,9 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bootcamp.emptyapplication.Interfaces.IDogDetail
+import com.bootcamp.emptyapplication.databinding.FragmentHomeBinding
 import com.squareup.picasso.Picasso
 
-class DogAdapter(val dogs: List<String>): RecyclerView.Adapter<DogAdapter.DogHolder>() {
+class DogAdapter(val dogs: List<String>, val dogListener : IDogDetail): RecyclerView.Adapter<DogAdapter.DogHolder>() {
 
     class DogHolder(val view: View): RecyclerView.ViewHolder(view){
         val image: ImageView = view.findViewById(R.id.iv_dog_product)
