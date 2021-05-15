@@ -43,9 +43,15 @@ class RecycleFragment : Fragment(), TeamListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_recycle, container, false)
+        //var view = inflater.inflate(R.layout.fragment_recycle, container, false)
 
         binding = FragmentRecycleBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         val listofTeams = Team.listofTeams()
         val recycler = binding.recycler
         val adapter = TeamAdapter(listofTeams,this)
@@ -54,7 +60,6 @@ class RecycleFragment : Fragment(), TeamListener {
         recycler.layoutManager = layoutManager
         recycler.adapter = adapter
 
-        return view
     }
 
     companion object {
