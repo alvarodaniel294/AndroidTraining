@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 
-class UserAdapter(private val users: List<User>): RecyclerView.Adapter<UserAdapter.ViewHolder>() {
+class UserAdapter(private val users: List<User>, val listener: RecyclerViewOnItemClickListener): RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
     private lateinit var context: Context
 
@@ -26,14 +26,20 @@ class UserAdapter(private val users: List<User>): RecyclerView.Adapter<UserAdapt
         val user = users.get(position)
         with(holder){
             bindings.Name.text = user.name
+            bindings.connectedText.text = if (user.connected) "Conectado" else "Desconectado"
+            bindings.cardView.setOnClickListener {
+                listener.viewProfile(user)
+            }
             Glide.with(context)
                 .load(user.url)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
                 .circleCrop()
                 .into(bindings.imgPhoto)
-
         }
+
+
+
     }
 
     override fun getItemCount(): Int = users.size
