@@ -5,21 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.bootcamp.livedataexample.viewmodels.MainActivityViewModel
 
 
-class TopFragment : Fragment() {
+class BottomFragment : Fragment() {
+    private val viewModel: MainActivityViewModel by activityViewModels()
 
-
-    private val viewModel:MainActivityViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
     }
 
@@ -28,23 +25,18 @@ class TopFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_top, container, false)
+        return inflater.inflate(R.layout.fragment_bottom, container, false)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val textView = view.findViewById<TextView>(R.id.textViewTopFragment)
-        val button = view.findViewById<Button>(R.id.updateButtonTopFragment)
-
-        button.setOnClickListener {
-            viewModel.updateTitle("updated from topFragment")
-        }
-
+        val textTitle = view.findViewById<TextView>(R.id.bottomFragmentTitle)
 
         viewModel.title.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+            textTitle.text = it
         })
+
     }
+
 }

@@ -9,6 +9,8 @@ class MainActivityViewModel:ViewModel() {
 
 
     private val _title: MutableLiveData<String> = MutableLiveData()
+
+
     val title:LiveData<String> = _title
 
     init {
@@ -31,4 +33,8 @@ class MainActivityViewModel:ViewModel() {
         _title.value = "new value from viewmodel"
     }
 
+
+    fun updateTitle(title:String){
+        _title.value = title
+    }
 }
