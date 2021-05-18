@@ -2,42 +2,26 @@ package com.bootcamp.emptyapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bootcamp.emptyapplication.Adapter.TeamAdapter
-import com.bootcamp.emptyapplication.Interfaces.TeamListener
-import com.bootcamp.emptyapplication.Models.Team
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bootcamp.emptyapplication.databinding.ActivityMainBinding
-import com.bootcamp.emptyapplication.fragments.RecycleFragment
-import com.bootcamp.emptyapplication.fragments.SecondFragment
-import com.bootcamp.emptyapplication.fragments.ThirdFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
-        var recycleFragment = RecycleFragment()
-        var secondFragment = SecondFragment()
-        var thirdFragment = ThirdFragment()
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val navController = findNavController(R.id.fragment)
 
-        binding.bottomNavigation.setOnNavigationItemSelectedListener {
-            when (it.itemId ) {
-                R.id.recyclerItem -> showFragment(recycleFragment)
-                R.id.secondItem -> showFragment(secondFragment)
-                R.id.thirdItem -> showFragment(thirdFragment)
-            }
-            true
-        }
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.firstfragment, R.id.secondFragment, R.id.thirdFragment))
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        bottomNavigationView.setupWithNavController(navController)
     }
-
-    private fun showFragment(fragment: Fragment) =
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragment,fragment)
-            commit()
-        }
 }

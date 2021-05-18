@@ -50,19 +50,6 @@ class RecycleFragment : Fragment(), TeamListener {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val listofTeams = Team.listofTeams()
-        val recycler = binding.recycler
-        val adapter = TeamAdapter(listofTeams,this)
-        val layoutManager = LinearLayoutManager(this.context)
-
-        recycler.layoutManager = layoutManager
-        recycler.adapter = adapter
-
-    }
-
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -86,6 +73,29 @@ class RecycleFragment : Fragment(), TeamListener {
     override fun onViewTeamDetailTap(team: Team) {
         val navController = findNavController()
         val bundle = Bundle()
+        bundle.putString(TeamDetail.NAME, team.name)
+        bundle.putString(TeamDetail.DESCRIPTION, team.description)
+        bundle.putString(TeamDetail.URL, team.url)
+        bundle.putInt(TeamDetail.IMAGE, team.image)
         navController.navigate(R.id.action_firstFragment_to_teamDetail, bundle)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val listofTeams = Team.listofTeams()
+        val recycler = binding.recycler
+        val adapter = TeamAdapter(listofTeams,this)
+        val layoutManager = LinearLayoutManager(this.context)
+
+        recycler.layoutManager = layoutManager
+        recycler.adapter = adapter
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            listofTeams.add(Team("Real Potosi","Some info",R.drawable.realpo,"https://www.clubrealpotosi.com/"))
+            adapter.notifyDataSetChanged()
+            binding.swipeRefreshLayout.setRefreshing(false);
+        }
+    }
+
 }

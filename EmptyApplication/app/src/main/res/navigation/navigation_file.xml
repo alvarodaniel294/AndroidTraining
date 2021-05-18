@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_file"
-    app:startDestination="@layout/fragment_recycle">
+    app:startDestination="@id/firstfragment">
     <fragment
         android:id="@+id/firstfragment"
         android:name="com.bootcamp.emptyapplication.fragments.RecycleFragment"
-        android:label="fragment_first"
+        android:label="fragment_recycle"
         tools:layout="@layout/fragment_recycle">
         <action
             android:id="@+id/action_firstFragment_to_teamDetail"
@@ -26,7 +26,7 @@
         tools:layout="@layout/fragment_third">
     </fragment>
     <fragment
-        android:id="@+id/teamDetalFragment"
+        android:id="@+id/TeamDetail"
         android:name="com.bootcamp.emptyapplication.fragments.TeamDetail"
         android:label="fragment_team_detail"
         tools:layout="@layout/fragment_team_detail">

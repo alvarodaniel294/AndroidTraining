@@ -1,11 +1,15 @@
 package com.bootcamp.emptyapplication.fragments
 
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import com.bootcamp.emptyapplication.R
+import com.squareup.picasso.Picasso
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -47,6 +51,10 @@ class TeamDetail : Fragment() {
          * @param param2 Parameter 2.
          * @return A new instance of fragment TeamDetail.
          */
+        const val NAME = "Name"
+        const val IMAGE = "Image"
+        const val DESCRIPTION = "Description"
+        const val URL = "Url"
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
@@ -57,4 +65,24 @@ class TeamDetail : Fragment() {
                 }
             }
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val nameUser: String = arguments?.getString(NAME)?: "emptyTeam"
+        val image: Int = arguments?.getInt(IMAGE)?: 1
+        val description: String = arguments?.getString(DESCRIPTION)?: "emptyDescription"
+        val url: String = arguments?.getString(URL)?: "emptyUrl"
+
+        val nameLabel = view.findViewById<TextView>(R.id.nameTeam)
+        val pictureTeam = view.findViewById<ImageView>(R.id.pictureTeam)
+        val descriptionTeam = view.findViewById<TextView>(R.id.description)
+        val urlTeam = view.findViewById<TextView>(R.id.url)
+        nameLabel.text = nameUser
+        descriptionTeam.text = description
+        urlTeam.text = url
+        urlTeam.movementMethod = LinkMovementMethod.getInstance()
+        Picasso.get()
+            .load(image)
+            .into(pictureTeam)
+    }
+
 }

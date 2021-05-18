@@ -10,6 +10,7 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bootcamp.emptyapplication.Interfaces.TeamListener
 import com.bootcamp.emptyapplication.Models.Team
 import com.bootcamp.emptyapplication.R
@@ -35,8 +36,6 @@ class TeamAdapter(val listOfTeams: MutableList<Team>, val listener: TeamListener
         }
         Picasso.get()
             .load(item.image)
-            .resize(100, 100)
-            .centerCrop()
             .into(holder.image)
 
     }
@@ -46,9 +45,9 @@ class TeamAdapter(val listOfTeams: MutableList<Team>, val listener: TeamListener
     }
 
     class TeamViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-
         val name: TextView = v.findViewById(R.id.name)
         val image: ImageView = v.findViewById(R.id.imageView)
         val verDetalle: Button = v.findViewById(R.id.verDetalle)
+
     }
 }

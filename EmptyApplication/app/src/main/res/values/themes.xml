@@ -13,4 +13,12 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="CardViewTeam" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">#C1CFC4</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="elevation">5dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+    </style>
 </resources>
