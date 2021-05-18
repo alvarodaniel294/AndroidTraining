@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.frameLayoutWrapper,fragment)
+            replace(R.id.fragment,fragment)
             commit()
         }
 }

@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <FrameLayout
-        android:id="@+id/frameLayoutWrapper"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottomNavigation">
-    </FrameLayout>
+<!--    <FrameLayout-->
+<!--        android:id="@+id/frameLayoutWrapper"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_above="@+id/bottomNavigation">-->
+<!--    </FrameLayout>-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
@@ -20,4 +20,5 @@
         app:itemTextColor="#fff"
         app:menu="@menu/nav_menu"
         ></com.google.android.material.bottomnavigation.BottomNavigationView>
+
 </RelativeLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_file"
+    app:startDestination="@layout/fragment_recycle">
+    <fragment
+        android:id="@+id/firstfragment"
+        android:name="com.bootcamp.emptyapplication.fragments.RecycleFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/fragment_recycle">
+        <action
+            android:id="@+id/action_firstFragment_to_teamDetail"
+            app:destination="@+id/TeamDetail"></action>
+    </fragment>
+    <fragment
+        android:id="@+id/secondFragment"
+        android:name="com.bootcamp.emptyapplication.fragments.SecondFragment"
+        android:label="fragment_second"
+        tools:layout="@layout/fragment_second">
+    </fragment>
+    <fragment
+        android:id="@+id/thirdFragment"
+        android:name="com.bootcamp.emptyapplication.fragments.ThirdFragment"
+        android:label="fragment_third"
+        tools:layout="@layout/fragment_third">
+    </fragment>
+    <fragment
+        android:id="@+id/teamDetalFragment"
+        android:name="com.bootcamp.emptyapplication.fragments.TeamDetail"
+        android:label="fragment_team_detail"
+        tools:layout="@layout/fragment_team_detail">
+    </fragment>
+
+</navigation>

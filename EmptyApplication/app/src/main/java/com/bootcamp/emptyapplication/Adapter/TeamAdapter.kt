@@ -30,6 +30,9 @@ class TeamAdapter(val listOfTeams: MutableList<Team>, val listener: TeamListener
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
         val item = listOfTeams[position]
         holder.name.text = item.name
+        holder.verDetalle.setOnClickListener {
+            listener.onViewTeamDetailTap(listOfTeams[position])
+        }
         Picasso.get()
             .load(item.image)
             .resize(100, 100)
