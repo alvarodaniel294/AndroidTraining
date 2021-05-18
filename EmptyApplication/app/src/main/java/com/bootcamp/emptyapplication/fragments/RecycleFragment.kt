@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bootcamp.emptyapplication.Adapter.TeamAdapter
@@ -82,7 +83,9 @@ class RecycleFragment : Fragment(), TeamListener {
             }
     }
 
-    override fun onViewTeamDetailTap() {
-
+    override fun onViewTeamDetailTap(Team: Team) {
+        val navController = findNavController()
+        val bundle = Bundle()
+        navController.navigate(R.id.fragment, bundle)
     }
 }
