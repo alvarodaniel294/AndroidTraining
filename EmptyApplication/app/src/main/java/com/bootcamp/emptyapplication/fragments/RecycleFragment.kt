@@ -82,10 +82,6 @@ class RecycleFragment : Fragment(), TeamListener {
             }
     }
 
-    override fun onDeleteTeamTap(team: Team) {
-
-    }
-
     override fun onViewTeamDetailTap() {
 
     }
