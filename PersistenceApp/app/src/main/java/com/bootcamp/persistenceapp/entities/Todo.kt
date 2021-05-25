@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class Todo(
 
     @PrimaryKey(autoGenerate = true)
-    val id:Int,
+    val id:Int?,
     @ColumnInfo(name = "value_db")
     val value:String,
     val states:String

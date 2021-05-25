@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PersistenceApp</string>
+    <string name="save_in_db">Save in db</string>
 </resources>

@@ -1,18 +1,16 @@
 package com.bootcamp.persistenceapp.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.lifecycle.LiveData
+import androidx.room.*
 import com.bootcamp.persistenceapp.entities.Todo
 
 @Dao
 interface TodoDao {
 
     @Query("SELECT * FROM Todo")
-    fun getTodosList():List<Todo>
+    fun getTodosList():LiveData<List<Todo>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addTodo(todo: Todo)
 
     @Delete
