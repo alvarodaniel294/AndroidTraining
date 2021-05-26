@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bootcamp.persistenceapp.entities.Todo
+import com.bootcamp.persistenceapp.viewmodelFactory.TodoViewModelFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,15 +22,17 @@ import kotlin.coroutines.CoroutineContext
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    companion object{
+    companion object {
         const val NAME_KEY = "myname"
     }
 
     lateinit var nameEditText: EditText
-    lateinit var preferences:SharedPreferences
-    lateinit var preferences2:SharedPreferences
-    lateinit var recycler:RecyclerView
-    val viewModel:TodoViewModel by viewModels()
+    lateinit var preferences: SharedPreferences
+    lateinit var preferences2: SharedPreferences
+    lateinit var recycler: RecyclerView
+    val viewModel: TodoViewModel by viewModels<TodoViewModel> {
+        TodoViewModelFactory((application as TodoApp).todoRepository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,19 +52,26 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         recycler.setHasFixedSize(true)
         recycler.adapter = TodoAdapter(mutableListOf())
 
-        showList()
+//        viewModel.getListFromDB(application).observe(this, Observer {
+//            recycler.adapter = TodoAdapter(it)
+//        })
+
+        viewModel.todoList.observe(this, Observer {
+            recycler.adapter = TodoAdapter(it)
+        })
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.saveButton ->{
+        when (v?.id) {
+            R.id.saveButton -> {
                 saveButton()
             }
-            R.id.showBtn ->{
+            R.id.showBtn -> {
                 showName()
             }
-            R.id.saveDBButton ->{
-                saveInDB()
+            R.id.saveDBButton -> {
+                //saveInDB()
+                saveInDBWithRepository()
             }
         }
     }
@@ -71,40 +81,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         viewModel.saveData(data, application)
     }
 
+    private fun saveInDBWithRepository(){
+        val data = nameEditText.text.toString()
+        val todo = Todo(null, data, "completed")
+        viewModel.saveDataWithRepository(todo)
+    }
+
     private fun showName() {
         val text = preferences.getString(NAME_KEY, "Default Value")
 
 
         text?.let {
             Toast.makeText(this, text, Toast.LENGTH_LONG).show()
-       }
+        }
     }
 
     private fun saveButton() {
-
         val textToSave = nameEditText.text.toString()
-
         preferences.edit().putString(NAME_KEY, textToSave).apply()
-
-
-       // preferences.edit().putInt(NAME_KEY, 88).apply()
-
-
-
-        //preferences.edit().putString(NAME_KEY, textToSave).apply()
-    }
-
-    fun showList(){
-        CoroutineScope(Dispatchers.IO).launch{
-            val app = application.applicationContext as TodoApp
-            val listTodo = app.todoDB.todoDao().getTodosList()
-            withContext(Dispatchers.Main){
-                listTodo.observe(this@MainActivity, Observer {
-                    recycler.adapter = TodoAdapter(it)
-                })
-            }
-
-        }
     }
 
 

@@ -6,25 +6,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bootcamp.persistenceapp.entities.Todo
+import com.bootcamp.persistenceapp.todoRepository.TodoRepository
 import kotlinx.coroutines.*
 
-class TodoViewModel:ViewModel() {
+class TodoViewModel (private val repository: TodoRepository):ViewModel() {
 
-    val _todoList:MutableLiveData<List<Todo>> = MutableLiveData()
-    val todoList:LiveData<List<Todo>> = _todoList
+    val todoList:LiveData<List<Todo>> = repository.todoList
 
 
-    fun getList(application: Application){
-        viewModelScope.launch {
-            withContext(Dispatchers.IO){
-                val app = application.applicationContext as TodoApp
-                val listTodo = app.todoDB.todoDao().getTodosList()
-                withContext(Dispatchers.Main){
-
-                }
-            }
-        }
+    fun getListFromDB(application: Application):LiveData<List<Todo>>{
+        val app = (application as TodoApp)
+        return app.todoDB.todoDao().getTodosList()
     }
+
 
     fun saveData(string: String, application: Application){
         viewModelScope.launch {
@@ -36,5 +30,11 @@ class TodoViewModel:ViewModel() {
 
         }
 
+    }
+
+    fun saveDataWithRepository(todo: Todo){
+        viewModelScope.launch {
+            repository.addTodo(todo)
+        }
     }
 }

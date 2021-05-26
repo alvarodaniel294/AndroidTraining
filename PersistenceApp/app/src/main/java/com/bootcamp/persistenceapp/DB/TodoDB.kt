@@ -28,7 +28,6 @@ abstract class TodoDB: RoomDatabase() {
                 INSTANCE = instance
                 instance
             }
-
         }
     }
 }
