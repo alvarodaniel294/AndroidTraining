@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WishListApp</string>
+    <string name="delete">delete</string>
+    <string name="edit">edit</string>
 </resources>
