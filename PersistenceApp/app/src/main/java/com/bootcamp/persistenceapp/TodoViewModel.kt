@@ -32,7 +32,7 @@ class TodoViewModel (private val repository: TodoRepository):ViewModel() {
 
     }
 
-    fun saveDataWithRepository(todo: Todo){
+    fun saveDataWithRepository(todo: Todo) {
         viewModelScope.launch {
             repository.addTodo(todo)
         }

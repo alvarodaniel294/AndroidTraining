@@ -2,4 +2,6 @@
     <string name="app_name">WishListApp</string>
     <string name="delete">delete</string>
     <string name="edit">edit</string>
+    <string name="add">Add</string>
+    <string name="text">Text</string>
 </resources>
