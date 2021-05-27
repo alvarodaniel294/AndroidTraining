@@ -25,6 +25,12 @@ class WishAdapter(val wishes: List<Wish>): RecyclerView.Adapter<WishAdapter.Wish
     override fun onBindViewHolder(holder: WishAdapter.WishHolder, position: Int) {
         val currentWish = wishes[position]
         holder.render(currentWish)
+        holder.wishBinding.editButton.setOnClickListener {
+            // TODO: edit your wish
+        }
+        holder.wishBinding.deleteButton.setOnClickListener {
+            //TODO: delete your wish, but first your an alert
+        }
     }
 
     override fun getItemCount(): Int = wishes.size
