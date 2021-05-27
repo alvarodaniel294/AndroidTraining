@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitSingleton {
 
-    val api:PostServices by lazy {
+    val api: PostServices by lazy {
         Retrofit
             .Builder()
             .baseUrl("https://jsonplaceholder.typicode.com/")
