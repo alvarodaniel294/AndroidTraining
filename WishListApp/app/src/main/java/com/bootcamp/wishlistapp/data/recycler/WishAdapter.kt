@@ -29,7 +29,7 @@ class WishAdapter(val wishes: List<Wish>): RecyclerView.Adapter<WishAdapter.Wish
             // TODO: edit your wish
         }
         holder.wishBinding.deleteButton.setOnClickListener {
-            //TODO: delete your wish, but first your an alert
+            //TODO: delete your wish, but first show an alert
         }
     }
 
