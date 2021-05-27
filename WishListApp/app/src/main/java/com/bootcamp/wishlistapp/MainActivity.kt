@@ -1,6 +1,7 @@
 package com.bootcamp.wishlistapp
 
 import android.app.AlertDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity(), WishListener {
     private lateinit var ownerEditText: EditText
     private lateinit var recycler: RecyclerView
     private lateinit var progressBar: ProgressBar
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,5 +82,12 @@ class MainActivity : AppCompatActivity(), WishListener {
     }
 
     override fun editWishItem(wish: Wish) {
+        val intent = Intent(this, EditActivity::class.java).apply {
+            putExtra(EditActivity.WISHID, wish.id.toString())
+            putExtra(EditActivity.WISHTEXT, wish.text)
+            putExtra(EditActivity.WISHPRIORITY, wish.priority)
+            putExtra(EditActivity.WISHOWNER, wish.owner)
+        }
+        startActivity(intent)
     }
 }

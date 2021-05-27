@@ -26,6 +26,10 @@ class WishAdapter(var wishList: List<Wish>, var listener: WishListener): Recycle
         holder.binding.deleteButton.setOnClickListener {
             listener.deleteWishItem(wish)
         }
+
+        holder.binding.editButton.setOnClickListener {
+            listener.editWishItem(wish)
+        }
     }
 
     override fun getItemCount(): Int {

@@ -3,4 +3,5 @@
     <string name="delete">delete</string>
     <string name="edit">edit</string>
     <string name="save_wish">Save wish</string>
+    <string name="edit_wish">Edit wish</string>
 </resources>
