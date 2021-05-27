@@ -15,6 +15,7 @@ class WishAdapter (val list:List<Wish>, val listener: WishListener): RecyclerVie
     class WishViewHolder(v: View): RecyclerView.ViewHolder(v){
         val title = v.findViewById<TextView>(R.id.wishText)
         val removeButton = v.findViewById<Button>(R.id.deleteButton)
+        val editButton = v.findViewById<Button>(R.id.editButton)
     }
 
 
@@ -33,6 +34,10 @@ class WishAdapter (val list:List<Wish>, val listener: WishListener): RecyclerVie
 
         holder.removeButton.setOnClickListener {
             listener.onRemoveItem(position)
+        }
+
+        holder.editButton.setOnClickListener {
+            listener.onEditItem(position)
         }
     }
 
