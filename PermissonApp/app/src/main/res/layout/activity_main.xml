@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/phoneText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint="phone" />
+
+    <Button
+        android:id="@+id/sendSMSbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sendsms" />
+
+    <Button
+        android:id="@+id/requestSMSpermission"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SMS permission"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/requestPermissionWithRequestCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/req_perm_with_requestcode" />
+
+    <Button
+        android:id="@+id/requestCallPermission"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/call_permission" />
+
+    <Button
+        android:id="@+id/btnCallPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/call_phone" />
+
+</LinearLayout>
