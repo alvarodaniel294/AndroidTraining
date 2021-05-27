@@ -1,5 +1,6 @@
 package com.bootcamp.wishlistapp
 
+import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
@@ -48,10 +49,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun saveWish() {
-        val wishText = wishEditText.text.toString()
-        val priorityText = priorityEditText.text.toString()
-        val ownerText = ownerEditText.text.toString()
-        val wishToSave = Wish(null, wishText, priorityText, ownerText)
-        viewModel.saveWish(wishToSave, application)
+        val builder = AlertDialog.Builder(this@MainActivity)
+        builder.setMessage("Are you sure you want to create the wish?")
+            .setPositiveButton("Yes") { dialog, id ->
+                val wishText = wishEditText.text.toString()
+                val priorityText = priorityEditText.text.toString()
+                val ownerText = ownerEditText.text.toString()
+                val wishToSave = Wish(null, wishText, priorityText, ownerText)
+                viewModel.saveWish(wishToSave, application)
+            }
+            .setNegativeButton("No") { dialog, id ->
+                dialog.dismiss()
+            }
+        val alert = builder.create()
+        alert.show()
     }
 }
