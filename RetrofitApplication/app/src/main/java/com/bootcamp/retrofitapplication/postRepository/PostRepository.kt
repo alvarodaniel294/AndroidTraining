@@ -11,24 +11,27 @@ import java.net.ConnectException
 class PostRepository {
 
     object PostRepositoryObject {
-        var INSTANCE:PostRepository? = null
-        fun getInstance():PostRepository  {
-            if (INSTANCE ==  null){
+        var INSTANCE: PostRepository? = null
+        fun getInstance(): PostRepository {
+            if (INSTANCE == null) {
                 INSTANCE = PostRepository()
                 return INSTANCE as PostRepository
-            }else{
+            } else {
                 return INSTANCE as PostRepository
             }
         }
     }
 
 
-    fun getPosts():MutableLiveData<List<PostItem>>{
+    fun getPosts(): MutableLiveData<List<PostItem>> {
         val mutableList: MutableLiveData<List<PostItem>> = MutableLiveData()
 
         RetrofitSingleton.api.getPosts().enqueue(object : Callback<List<PostItem>> {
-            override fun onResponse(call: Call<List<PostItem>>, response: Response<List<PostItem>>) {
-                if (response.code() == 200){
+            override fun onResponse(
+                call: Call<List<PostItem>>,
+                response: Response<List<PostItem>>
+            ) {
+                if (response.code() == 200) {
                     response.body()?.let {
                         mutableList.value = it
                     }

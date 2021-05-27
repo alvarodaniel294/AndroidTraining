@@ -18,7 +18,7 @@ import retrofit2.Response
 import java.net.ConnectException
 
 class MainActivity : AppCompatActivity() {
-    var adapter:PostItemAdapter = PostItemAdapter(mutableListOf())
+    var adapter: PostItemAdapter = PostItemAdapter(mutableListOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         val recylcer = findViewById<RecyclerView>(R.id.recyclerPosts)
         recylcer.layoutManager = LinearLayoutManager(this)
         recylcer.adapter = adapter
-
 
 
         val button = findViewById<MaterialButton>(R.id.buttonrequest)
@@ -41,15 +40,18 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun sendRequest(){
-        RetrofitSingleton.api.getPosts().enqueue(object : Callback<List<PostItem>>{
-            override fun onResponse(call: Call<List<PostItem>>, response: Response<List<PostItem>>) {
-                if (response.code() == 200){
+    fun sendRequest() {
+        RetrofitSingleton.api.getPosts().enqueue(object : Callback<List<PostItem>> {
+            override fun onResponse(
+                call: Call<List<PostItem>>,
+                response: Response<List<PostItem>>
+            ) {
+                if (response.code() == 200) {
                     response.body()?.let {
                         adapter.list = it
                         adapter.notifyDataSetChanged()
                     }
-                }else{
+                } else {
 
                 }
             }
@@ -57,10 +59,10 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call<List<PostItem>>, t: Throwable) {
 
                 when {
-                    t is IOException ->{
+                    t is IOException -> {
 
                     }
-                    t is ConnectException ->{
+                    t is ConnectException -> {
 
                     }
                 }
@@ -68,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    fun sendRequestRepository(){
+    fun sendRequestRepository() {
         PostRepository.PostRepositoryObject.getInstance().getPosts().observe(this, Observer {
             adapter.list = it
             adapter.notifyDataSetChanged()

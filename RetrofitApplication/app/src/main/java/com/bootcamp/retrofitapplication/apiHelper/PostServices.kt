@@ -11,11 +11,14 @@ import retrofit2.http.Query
 interface PostServices {
 
     @GET("posts")
-    fun getPosts():Call<List<PostItem>>
+    fun getPosts(): Call<List<PostItem>>
 
 
     @GET("comments")
-    fun getCommentByPostId( @Query("postId") somePostId:Int, @Query("asdf") asdf:Int ):Call<List<CommentItem>>
+    fun getCommentByPostId(
+        @Query("postId") somePostId: Int,
+        @Query("asdf") asdf: Int
+    ): Call<List<CommentItem>>
 
 
 //    @POST("SOMEDATA")

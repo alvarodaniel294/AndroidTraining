@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bootcamp.retrofitapplication.R
 import com.bootcamp.retrofitapplication.models.PostItem
 
-class PostItemAdapter(var list: List<PostItem>):RecyclerView.Adapter<PostItemAdapter.PostItemViewHolder>() {
+class PostItemAdapter(var list: List<PostItem>) :
+    RecyclerView.Adapter<PostItemAdapter.PostItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostItemViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.post_item_layout, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.post_item_layout, parent, false)
         return PostItemViewHolder(view)
     }
 
@@ -25,8 +27,8 @@ class PostItemAdapter(var list: List<PostItem>):RecyclerView.Adapter<PostItemAda
         return list.size
     }
 
-    class PostItemViewHolder(view:View):RecyclerView.ViewHolder(view){
-        val title:TextView = view.findViewById(R.id.title)
-        val desc:TextView = view.findViewById(R.id.description)
+    class PostItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val title: TextView = view.findViewById(R.id.title)
+        val desc: TextView = view.findViewById(R.id.description)
     }
 }
