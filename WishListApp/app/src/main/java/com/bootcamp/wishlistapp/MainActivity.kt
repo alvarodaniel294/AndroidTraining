@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bootcamp.wishlistapp.adapters.WishAdapter
 import com.bootcamp.wishlistapp.databinding.ActivityMainBinding
 import com.bootcamp.wishlistapp.entities.Wish
+import com.bootcamp.wishlistapp.listeners.WishListener
 import com.bootcamp.wishlistapp.viewModels.MainViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), WishListener {
 
     lateinit var binding: ActivityMainBinding
 
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         recycler.layoutManager = LinearLayoutManager(this)
 
         viewModel.getListFromDatabase(application).observe(this, {
-            recycler.adapter = WishAdapter(it)
+            recycler.adapter = WishAdapter(it, this)
         })
     }
 
@@ -63,5 +64,21 @@ class MainActivity : AppCompatActivity() {
             }
         val alert = builder.create()
         alert.show()
+    }
+
+    override fun deleteWishItem(wish: Wish) {
+        val builder = AlertDialog.Builder(this@MainActivity)
+        builder.setMessage("Are you sure you want to delete the wish?")
+            .setPositiveButton("Yes") { dialog, id ->
+                viewModel.deleteWish(wish, application)
+            }
+            .setNegativeButton("No") { dialog, id ->
+                dialog.dismiss()
+            }
+        val alert = builder.create()
+        alert.show()
+    }
+
+    override fun editWishItem(wish: Wish) {
     }
 }

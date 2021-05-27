@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bootcamp.wishlistapp.databinding.WishItemBinding
 import com.bootcamp.wishlistapp.entities.Wish
+import com.bootcamp.wishlistapp.listeners.WishListener
 
-class WishAdapter(var wishList: List<Wish>): RecyclerView.Adapter<WishAdapter.WishViewHolder>() {
+class WishAdapter(var wishList: List<Wish>, var listener: WishListener): RecyclerView.Adapter<WishAdapter.WishViewHolder>() {
 
     class WishViewHolder(container: WishItemBinding): RecyclerView.ViewHolder(container.root) {
         val binding: WishItemBinding = container
@@ -21,6 +22,10 @@ class WishAdapter(var wishList: List<Wish>): RecyclerView.Adapter<WishAdapter.Wi
     override fun onBindViewHolder(holder: WishViewHolder, position: Int) {
         val wish = wishList[position]
         holder.binding.wishText.text = wish.text
+
+        holder.binding.deleteButton.setOnClickListener {
+            listener.deleteWishItem(wish)
+        }
     }
 
     override fun getItemCount(): Int {

@@ -25,4 +25,13 @@ class MainViewModel: ViewModel() {
             }
         }
     }
+
+    fun deleteWish(wishToDelete: Wish, application: Application){
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                val app = application.applicationContext as WishApp
+                app.todoDatabase.wishDao().removeWish(wishToDelete)
+            }
+        }
+    }
 }
