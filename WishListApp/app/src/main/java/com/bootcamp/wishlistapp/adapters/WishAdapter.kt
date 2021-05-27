@@ -21,7 +21,10 @@ class WishAdapter(var wishList: List<Wish>, var listener: WishListener): Recycle
 
     override fun onBindViewHolder(holder: WishViewHolder, position: Int) {
         val wish = wishList[position]
-        holder.binding.wishText.text = wish.text
+        val wishText = wish.text
+        val priorityText = wish.priority
+        val ownerText = wish.owner
+        holder.binding.wishText.text = "$wishText. $priorityText. $ownerText"
 
         holder.binding.deleteButton.setOnClickListener {
             listener.deleteWishItem(wish)
