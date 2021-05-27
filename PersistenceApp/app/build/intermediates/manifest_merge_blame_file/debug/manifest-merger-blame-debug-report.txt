@@ -1,0 +1,59 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.bootcamp.persistenceapp"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+8-->C:\Users\Locoto\AndroidStudioProjects\AndroidTraining\PersistenceApp\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="30" />
+9-->C:\Users\Locoto\AndroidStudioProjects\AndroidTraining\PersistenceApp\app\src\main\AndroidManifest.xml
+10
+11    <application
+11-->C:\Users\Locoto\AndroidStudioProjects\AndroidTraining\PersistenceApp\app\src\main\AndroidManifest.xml:5:5-20:19
+12        android:name="com.bootcamp.persistenceapp.TodoApp"
+12-->C:\Users\Locoto\AndroidStudioProjects\AndroidTraining\PersistenceApp\app\src\main\AndroidManifest.xml:6:9-32
+13        android:allowBackup="true"
+13-->C:\Users\Locoto\AndroidStudioProjects\AndroidTraining\PersistenceApp\app\src\main\AndroidManifest.xml:7:9-35
+14        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+14-->[androidx.core:core:1.5.0] C:\Users\Locoto\.gradle\caches\transforms-2\files-2.1\967826c52c5558ea22060f7728ba7d3b\core-1.5.0\AndroidManifest.xml:24:18-86
+15        android:debuggable="true"
+16        android:extractNativeLibs="false"
+17        android:icon="@mipmap/ic_launcher"
+17-->C:\Users\Locoto\AndroidStudioProjects\AndroidTraining\PersistenceApp\app\src\main\AndroidManifest.xml:8:9-43
+18        android:label="@string/app_name"
+18-->C:\Users\Locoto\AndroidStudioProjects\AndroidTraining\PersistenceApp\app\src\main\AndroidManifest.xml:9:9-41
+19        android:roundIcon="@mipmap/ic_launcher_round"
+19-->C:\Users\Locoto\AndroidStudioProjects\AndroidTraining\PersistenceApp\app\src\main\AndroidManifest.xml:10:9-54
+20        android:supportsRtl="true"
+20-->C:\Users\Locoto\AndroidStudioProjects\AndroidTraining\PersistenceApp\app\src\main\AndroidManifest.xml:11:9-35
+21        android:testOnly="true"
+22        android:theme="@style/Theme.PersistenceApp" >
+22-->C:\Users\Locoto\AndroidStudioProjects\AndroidTraining\PersistenceApp\app\src\main\AndroidManifest.xml:12:9-52
+23        <activity android:name="com.bootcamp.persistenceapp.MainActivity" >
+23-->C:\Users\Locoto\AndroidStudioProjects\AndroidTraining\PersistenceApp\app\src\main\AndroidManifest.xml:13:9-19:20
+23-->C:\Users\Locoto\AndroidStudioProjects\AndroidTraining\PersistenceApp\app\src\main\AndroidManifest.xml:13:19-47
+24            <intent-filter>
+24-->C:\Users\Locoto\AndroidStudioProjects\AndroidTraining\PersistenceApp\app\src\main\AndroidManifest.xml:14:13-18:29
+25                <action android:name="android.intent.action.MAIN" />
+25-->C:\Users\Locoto\AndroidStudioProjects\AndroidTraining\PersistenceApp\app\src\main\AndroidManifest.xml:15:17-69
+25-->C:\Users\Locoto\AndroidStudioProjects\AndroidTraining\PersistenceApp\app\src\main\AndroidManifest.xml:15:25-66
+26
+27                <category android:name="android.intent.category.LAUNCHER" />
+27-->C:\Users\Locoto\AndroidStudioProjects\AndroidTraining\PersistenceApp\app\src\main\AndroidManifest.xml:17:17-77
+27-->C:\Users\Locoto\AndroidStudioProjects\AndroidTraining\PersistenceApp\app\src\main\AndroidManifest.xml:17:27-74
+28            </intent-filter>
+29        </activity>
+30
+31        <service
+31-->[androidx.room:room-runtime:2.3.0] C:\Users\Locoto\.gradle\caches\transforms-2\files-2.1\98c9b54c0098e4a9d2e7e9c9c33ebaf2\room-runtime-2.3.0\AndroidManifest.xml:25:9-28:40
+32            android:name="androidx.room.MultiInstanceInvalidationService"
+32-->[androidx.room:room-runtime:2.3.0] C:\Users\Locoto\.gradle\caches\transforms-2\files-2.1\98c9b54c0098e4a9d2e7e9c9c33ebaf2\room-runtime-2.3.0\AndroidManifest.xml:26:13-74
+33            android:directBootAware="true"
+33-->[androidx.room:room-runtime:2.3.0] C:\Users\Locoto\.gradle\caches\transforms-2\files-2.1\98c9b54c0098e4a9d2e7e9c9c33ebaf2\room-runtime-2.3.0\AndroidManifest.xml:27:13-43
+34            android:exported="false" />
+34-->[androidx.room:room-runtime:2.3.0] C:\Users\Locoto\.gradle\caches\transforms-2\files-2.1\98c9b54c0098e4a9d2e7e9c9c33ebaf2\room-runtime-2.3.0\AndroidManifest.xml:28:13-37
+35    </application>
+36
+37</manifest>

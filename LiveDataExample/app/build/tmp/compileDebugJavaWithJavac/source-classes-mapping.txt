@@ -1,0 +1,2 @@
+com/bootcamp/livedataexample/BuildConfig.java
+ com.bootcamp.livedataexample.BuildConfig
