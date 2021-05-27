@@ -1,2 +1,2 @@
-rootProject.name = "WishListApp"
 include ':app'
+rootProject.name = "WishListApp"

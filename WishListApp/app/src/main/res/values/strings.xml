@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">WishListApp</string>
-    <string name="delete">delete</string>
-    <string name="edit">edit</string>
+    <string name="save_in_db">SAVE WISH</string>
 </resources>

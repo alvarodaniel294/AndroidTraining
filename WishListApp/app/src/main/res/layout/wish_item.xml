@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:minWidth="0dp"
-        app:icon="@drawable/ic_baseline_edit_24"
+        android:backgroundTint="#f6d229"
         app:iconPadding="0dp"
         app:layout_constraintEnd_toStartOf="@id/deleteButton"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:minWidth="0dp"
-        app:icon="@drawable/ic_baseline_delete_24"
+        android:backgroundTint="#cc6633"
         app:iconPadding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

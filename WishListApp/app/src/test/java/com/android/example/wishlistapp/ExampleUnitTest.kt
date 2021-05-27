@@ -1,4 +1,4 @@
-package com.bootcamp.wishlistapp
+package com.android.example.wishlistapp
 
 import org.junit.Test
 
