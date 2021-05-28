@@ -1,6 +1,8 @@
 package com.bootcamp.wishlistapp.listener
 
+import com.bootcamp.wishlistapp.Wish
+
 interface WishListener {
-    fun onRemoveItem(index: Int)
-    fun onEditItem(index: Int)
+    fun onRemoveItem(wish: Wish)
+    fun onEditItem(wish: Wish)
 }

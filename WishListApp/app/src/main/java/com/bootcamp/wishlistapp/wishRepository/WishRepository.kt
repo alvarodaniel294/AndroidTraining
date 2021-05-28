@@ -15,10 +15,12 @@ class WishRepository(private val dao:WishDao) {
         dao.addWish(wish)
     }
 
-    fun updateWish(wish: Wish){
-
+    @WorkerThread
+    suspend fun updateWish(wish: Wish){
+        dao.addWish(wish)
     }
 
+    @WorkerThread
     fun deleteWish(wish: Wish){
         dao.removeWish(wish)
     }

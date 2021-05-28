@@ -20,7 +20,7 @@ abstract class WishDB: RoomDatabase() {
 
         fun getDatabase(context: Context): WishDB {
             return INSTANCE ?: synchronized(this){
-                val instance = Room.databaseBuilder(context, WishDB::class.java, "WishDB").build()
+                val instance = Room.databaseBuilder(context, WishDB::class.java, "WishDB").allowMainThreadQueries().build()
                 INSTANCE = instance
                 instance
             }

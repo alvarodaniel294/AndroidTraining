@@ -33,11 +33,11 @@ class WishAdapter (val list:List<Wish>, val listener: WishListener): RecyclerVie
         holder.title.text = sb.toString()
 
         holder.removeButton.setOnClickListener {
-            listener.onRemoveItem(position)
+            listener.onRemoveItem(item)
         }
 
         holder.editButton.setOnClickListener {
-            listener.onEditItem(position)
+            listener.onEditItem(item)
         }
     }
 

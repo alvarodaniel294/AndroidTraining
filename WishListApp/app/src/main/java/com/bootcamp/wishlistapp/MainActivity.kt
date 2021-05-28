@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bootcamp.wishlistapp.databinding.ActivityMainBinding
 import com.bootcamp.wishlistapp.listener.WishListener
 import com.bootcamp.wishlistapp.viewmodelFactory.WishViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity(), WishListener {
@@ -61,14 +64,16 @@ class MainActivity : AppCompatActivity(), WishListener {
         viewModel.saveDataWithRepository(record)
     }
 
-    override fun onRemoveItem(index: Int) {
+    override fun onRemoveItem(wish: Wish) {
 
         val dialogClickListener =
             DialogInterface.OnClickListener { dialog, which ->
                 when (which) {
                     DialogInterface.BUTTON_POSITIVE -> {
-                        //viewModel.deleteWish(record)
-                        Log.d("ELIMINAR",index.toString())
+                        CoroutineScope(Dispatchers.IO).launch {
+                            viewModel.deleteWish(wish)
+                            Log.d("ELIMINAR",wish.id.toString())
+                        }
                     }
                     DialogInterface.BUTTON_NEGATIVE -> {
 
@@ -81,7 +86,7 @@ class MainActivity : AppCompatActivity(), WishListener {
             .setNegativeButton("No", dialogClickListener).show()
     }
 
-    override fun onEditItem(index: Int) {
-        Log.d("EDITAR",index.toString())
+    override fun onEditItem(wish: Wish) {
+        Log.d("EDITAR",wish.id.toString())
     }
 }
