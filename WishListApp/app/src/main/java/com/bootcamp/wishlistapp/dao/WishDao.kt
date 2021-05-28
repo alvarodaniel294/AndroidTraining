@@ -1,19 +1,20 @@
 package com.bootcamp.wishlistapp.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.lifecycle.LiveData
+import androidx.room.*
 import com.bootcamp.wishlistapp.entities.Wish
 
 @Dao
 interface WishDao {
 
     @Query("SELECT * FROM Wish")
-    suspend fun getWishList(): List<Wish>
+    fun getWishList(): LiveData<List<Wish>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addWish(wish: Wish)
+
+    @Update
+    suspend fun editWish(wish: Wish)
 
     @Delete
     suspend fun removeWish(wish: Wish)

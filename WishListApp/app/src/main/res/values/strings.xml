@@ -4,4 +4,7 @@
     <string name="edit">edit</string>
     <string name="add">Add</string>
     <string name="text">Text</string>
+    <string name="priority">Priority</string>
+    <string name="owner">Owner</string>
+    <string name="wish">Wish</string>
 </resources>

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class Wish (
     @PrimaryKey(autoGenerate = true)
     val id: Int?,
-    val text: String,
-    val priority: String,
-    val owner: String,
+    var text: String,
+    var priority: String,
+    var owner: String,
 )
