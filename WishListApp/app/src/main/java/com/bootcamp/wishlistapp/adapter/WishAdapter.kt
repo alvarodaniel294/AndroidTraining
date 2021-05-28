@@ -7,11 +7,12 @@ import com.bootcamp.wishlistapp.databinding.WishItemBinding
 import com.bootcamp.wishlistapp.entities.Wish
 import com.bootcamp.wishlistapp.interfaces.WishListListener
 
-class WishAdapter(private var list: List<Wish>, val listener: WishListListener): RecyclerView.Adapter<WishAdapter.ViewHolder>() {
+class WishAdapter(private var list: List<Wish>, private val listener: WishListListener): RecyclerView.Adapter<WishAdapter.ViewHolder>() {
 
     class ViewHolder(private val binding: WishItemBinding, var listener: WishListListener): RecyclerView.ViewHolder(binding.root) {
         fun bind(wish: Wish) {
-            binding.wishText.text = """${wish.text} - Owner: ${wish.owner} - Priority: ${wish.priority}"""
+            val text = wish.text + "\n" + wish.owner + "\n" + wish.priority
+            binding.wishText.text = text
             binding.deleteButton.setOnClickListener {
                 listener.didRemovePressed(wish)
             }
