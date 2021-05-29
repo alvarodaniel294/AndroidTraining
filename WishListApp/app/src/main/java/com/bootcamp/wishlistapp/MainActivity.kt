@@ -8,11 +8,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bootcamp.wishlistapp.data.Wish
 import com.bootcamp.wishlistapp.data.WishApp
+import com.bootcamp.wishlistapp.data.WishListener
 import com.bootcamp.wishlistapp.data.recycler.WishAdapter
 import com.bootcamp.wishlistapp.databinding.ActivityMainBinding
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), WishListener {
 
     lateinit var activityMainBinding: ActivityMainBinding
     lateinit var wishAdapter: WishAdapter
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initRecyclerView(){
-        wishAdapter = WishAdapter( app.room.wishDao().getAllWishes()  )
+        wishAdapter = WishAdapter( app.room.wishDao().getAllWishes(),this  )
         val recycler = activityMainBinding.rvWish
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = wishAdapter
@@ -48,5 +49,13 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding.btnShow.setOnClickListener {
             wishAdapter.notifyDataSetChanged()
         }
+    }
+
+    override fun editWish(editWish: Wish) {
+        TODO("Not yet implemented")
+    }
+
+    override fun deleteWish(delWish: Wish) {
+        TODO("Not yet implemented")
     }
 }
