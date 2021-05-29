@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class wishViewModel: ViewModel() {
+class WishViewModel: ViewModel() {
 
     fun getAllWishesFromDatabase(app: Application): LiveData<List<Wish>>{
         val myApp = (app as WishApp)

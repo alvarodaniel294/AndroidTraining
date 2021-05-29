@@ -10,7 +10,7 @@ import com.bootcamp.wishlistapp.data.Wish
 import com.bootcamp.wishlistapp.data.WishListener
 import com.bootcamp.wishlistapp.databinding.WishItemBinding
 
-class WishAdapter(val wishes: List<Wish>, wishListener: WishListener): RecyclerView.Adapter<WishAdapter.WishHolder>(){
+class WishAdapter(var wishes: List<Wish>, val wishListener: WishListener): RecyclerView.Adapter<WishAdapter.WishHolder>(){
     class WishHolder(val view: View): RecyclerView.ViewHolder(view){
         val wishBinding: WishItemBinding = WishItemBinding.bind(view)
         fun render(wish: Wish){
@@ -27,10 +27,10 @@ class WishAdapter(val wishes: List<Wish>, wishListener: WishListener): RecyclerV
         val currentWish = wishes[position]
         holder.render(currentWish)
         holder.wishBinding.editButton.setOnClickListener {
-
+            wishListener.editWish(currentWish)
         }
         holder.wishBinding.deleteButton.setOnClickListener {
-            //TODO: delete your wish, but first show an alert
+            wishListener.deleteWish(currentWish)
         }
     }
 

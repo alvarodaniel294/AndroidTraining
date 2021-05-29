@@ -2,22 +2,22 @@ package com.bootcamp.wishlistapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.LinearLayout
-import androidx.lifecycle.GeneratedAdapter
-import androidx.lifecycle.lifecycleScope
+import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bootcamp.wishlistapp.data.Wish
 import com.bootcamp.wishlistapp.data.WishApp
 import com.bootcamp.wishlistapp.data.WishListener
+import com.bootcamp.wishlistapp.data.WishViewModel
 import com.bootcamp.wishlistapp.data.recycler.WishAdapter
 import com.bootcamp.wishlistapp.databinding.ActivityMainBinding
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), WishListener {
 
     lateinit var activityMainBinding: ActivityMainBinding
+    val wishViewModel: WishViewModel by viewModels()
     lateinit var wishAdapter: WishAdapter
-    val app = applicationContext as WishApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,10 +26,18 @@ class MainActivity : AppCompatActivity(), WishListener {
         initRecyclerView()
         listenButtonSave()
         listenButtonShow()
+        initSubscriptions()
+    }
+
+
+    fun initSubscriptions(){
+        wishViewModel.getAllWishesFromDatabase(application).observe(this, Observer { currentWishes ->
+            wishAdapter.wishes = currentWishes
+        })
     }
 
     fun initRecyclerView(){
-        wishAdapter = WishAdapter( app.room.wishDao().getAllWishes(),this  )
+        wishAdapter = WishAdapter( emptyList(),this  )
         val recycler = activityMainBinding.rvWish
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = wishAdapter
@@ -37,11 +45,19 @@ class MainActivity : AppCompatActivity(), WishListener {
 
     fun listenButtonSave(){
         activityMainBinding.btnSave.setOnClickListener {
-            val body = activityMainBinding.edBody.text.toString()
-            val priority: String = activityMainBinding.edPriority.text.toString()
-            val owner: String = activityMainBinding.edOwner.text.toString()
-            val myWish: Wish = Wish(null,body,priority,owner)
-            app.room.wishDao().insertWish(myWish)
+            val alertDialog = AlertDialog.Builder(this)
+            alertDialog.setMessage("Do you want to insert this wish ?")
+                .setPositiveButton("Hell Yeah"){ dialog, id ->
+                    val body = activityMainBinding.edBody.text.toString()
+                    val priority: String = activityMainBinding.edPriority.text.toString()
+                    val owner: String = activityMainBinding.edOwner.text.toString()
+                    val myWish: Wish = Wish(null,body,priority,owner)
+                    wishViewModel.saveNewWish(myWish,application)
+                }
+                .setNegativeButton("Nope."){ dialog, id ->
+                    dialog.dismiss()
+                }
+            alertDialog.create().show()
         }
     }
 
@@ -52,10 +68,10 @@ class MainActivity : AppCompatActivity(), WishListener {
     }
 
     override fun editWish(editWish: Wish) {
-        TODO("Not yet implemented")
+        // TODO: muestra un alert y edita tu wish
     }
 
     override fun deleteWish(delWish: Wish) {
-        TODO("Not yet implemented")
+        // muestra un alert y elimina el wish
     }
 }
