@@ -5,7 +5,7 @@ import androidx.room.Room
 
 class WishApp: Application() {
 
-    val todoDatabase by lazy {
+    val myWishDatabase by lazy {
         WishDB.getDatabase(applicationContext)
     }
 
