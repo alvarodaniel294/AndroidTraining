@@ -5,9 +5,8 @@ import androidx.room.Room
 
 class WishApp: Application() {
 
-    val room = Room.databaseBuilder(
-       this,
-        WishDB::class.java,
-        "wishdb"
-    ).build()
+    val todoDatabase by lazy {
+        WishDB.getDatabase(applicationContext)
+    }
+
 }
