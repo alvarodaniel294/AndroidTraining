@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bootcamp.wishlistapp.data.Wish
 import com.bootcamp.wishlistapp.data.WishApp
 import com.bootcamp.wishlistapp.data.WishListener
@@ -18,7 +19,7 @@ class MainActivity : AppCompatActivity(), WishListener {
 
     lateinit var activityMainBinding: ActivityMainBinding
     val wishViewModel: WishViewModel by viewModels()
-    lateinit var wishAdapter: WishAdapter
+    lateinit var recycler: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,22 +27,19 @@ class MainActivity : AppCompatActivity(), WishListener {
         setContentView(activityMainBinding.root)
         initRecyclerView()
         listenButtonSave()
-        listenButtonShow()
         initSubscriptions()
     }
 
 
     fun initSubscriptions(){
         wishViewModel.getAllWishesFromDatabase(application).observe(this, Observer { currentWishes ->
-            wishAdapter.wishes = currentWishes
+            recycler.adapter = WishAdapter(currentWishes,this)
         })
     }
 
     fun initRecyclerView(){
-        wishAdapter = WishAdapter( emptyList(),this  )
-        val recycler = activityMainBinding.rvWish
+        recycler = activityMainBinding.rvWish
         recycler.layoutManager = LinearLayoutManager(this)
-        recycler.adapter = wishAdapter
     }
 
     fun listenButtonSave(){
@@ -59,12 +57,6 @@ class MainActivity : AppCompatActivity(), WishListener {
                     dialog.dismiss()
                 }
             alertDialog.create().show()
-        }
-    }
-
-    fun listenButtonShow(){
-        activityMainBinding.btnShow.setOnClickListener {
-            wishAdapter.notifyDataSetChanged()
         }
     }
 
