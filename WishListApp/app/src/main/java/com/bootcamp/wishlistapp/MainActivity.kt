@@ -2,6 +2,7 @@ package com.bootcamp.wishlistapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
@@ -68,10 +69,30 @@ class MainActivity : AppCompatActivity(), WishListener {
     }
 
     override fun editWish(editWish: Wish) {
-        // TODO: muestra un alert y edita tu wish
+        var alertDialog: AlertDialog.Builder = AlertDialog.Builder(this)
+        alertDialog.setMessage("Do you really want to delete this wish ?")
+            .setPositiveButton("Yes"){ dialog, id ->
+                activityMainBinding.edBody.text = editWish.body
+                activityMainBinding.edOwner.text = editWish.owner
+                activityMainBinding.edPriority.text = editWish.priority
+            }
+            .setNegativeButton("Nope"){ dialog, id ->
+                dialog.dismiss()
+            }
+        alertDialog.create().show()
     }
 
     override fun deleteWish(delWish: Wish) {
         // muestra un alert y elimina el wish
+        var alertDialog: AlertDialog.Builder = AlertDialog.Builder(this)
+        alertDialog.setMessage("Do you really want to delete this wish ?")
+            .setPositiveButton("Yes"){ dialog, id ->
+            wishViewModel.deleteWish(delWish,application)
+             }
+            .setNegativeButton("Nope"){ dialog, id ->
+                dialog.dismiss()
+            }
+        alertDialog.create().show()
+
     }
 }
