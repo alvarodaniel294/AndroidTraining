@@ -70,11 +70,11 @@ class MainActivity : AppCompatActivity(), WishListener {
 
     override fun editWish(editWish: Wish) {
         var alertDialog: AlertDialog.Builder = AlertDialog.Builder(this)
-        alertDialog.setMessage("Do you really want to delete this wish ?")
+        alertDialog.setMessage("Do you really want to edit this wish ?")
             .setPositiveButton("Yes"){ dialog, id ->
-                activityMainBinding.edBody.text = editWish.body
-                activityMainBinding.edOwner.text = editWish.owner
-                activityMainBinding.edPriority.text = editWish.priority
+                activityMainBinding.edBody.setText(editWish.body)
+                activityMainBinding.edOwner.setText(editWish.owner)
+                activityMainBinding.edPriority.setText(editWish.priority)
             }
             .setNegativeButton("Nope"){ dialog, id ->
                 dialog.dismiss()
@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity(), WishListener {
             .setPositiveButton("Yes"){ dialog, id ->
             wishViewModel.deleteWish(delWish,application)
              }
-            .setNegativeButton("Nope"){ dialog, id ->
+            .setNegativeButton("Nope."){ dialog, id ->
                 dialog.dismiss()
             }
         alertDialog.create().show()
