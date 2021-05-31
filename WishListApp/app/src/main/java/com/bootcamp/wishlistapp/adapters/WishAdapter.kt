@@ -3,6 +3,7 @@ package com.bootcamp.wishlistapp.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bootcamp.wishlistapp.R
 import com.bootcamp.wishlistapp.databinding.WishItemBinding
 import com.bootcamp.wishlistapp.entities.Wish
 import com.bootcamp.wishlistapp.listeners.WishListener
@@ -24,7 +25,9 @@ class WishAdapter(var wishList: List<Wish>, var listener: WishListener): Recycle
         val wishText = wish.text
         val priorityText = wish.priority
         val ownerText = wish.owner
-        holder.binding.wishText.text = "$wishText. $priorityText. $ownerText"
+        holder.binding.wishText.text = wishText
+        holder.binding.wishOwner.text = "From: $ownerText"
+        holder.binding.wishPriority.text = "Priority: $priorityText"
 
         holder.binding.deleteButton.setOnClickListener {
             listener.deleteWishItem(wish)
