@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity(), WishListener {
     private val viewModel: MainViewModel by viewModels()
 
     private lateinit var wishEditText: EditText
-    private lateinit var priorityEditText: EditText
     private lateinit var ownerEditText: EditText
     private lateinit var recycler: RecyclerView
     private lateinit var progressBar: ProgressBar
@@ -38,7 +37,6 @@ class MainActivity : AppCompatActivity(), WishListener {
         setContentView(binding.root)
 
         wishEditText = binding.wishEditText
-        //priorityEditText = binding.priorityEditText
         spinner = binding.prioritySpinner
         ownerEditText = binding.ownerEditList
 
