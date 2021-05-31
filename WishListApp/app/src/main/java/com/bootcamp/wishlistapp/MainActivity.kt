@@ -4,8 +4,11 @@ import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.Spinner
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +29,7 @@ class MainActivity : AppCompatActivity(), WishListener {
     private lateinit var ownerEditText: EditText
     private lateinit var recycler: RecyclerView
     private lateinit var progressBar: ProgressBar
+    private lateinit var spinner: Spinner
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,13 +38,25 @@ class MainActivity : AppCompatActivity(), WishListener {
         setContentView(binding.root)
 
         wishEditText = binding.wishEditText
-        priorityEditText = binding.priorityEditText
+        //priorityEditText = binding.priorityEditText
+        spinner = binding.prioritySpinner
         ownerEditText = binding.ownerEditList
 
         progressBar = binding.progressBar
 
         binding.saveButton.setOnClickListener {
             saveWish()
+        }
+
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.priorities_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
         }
 
         recycler = binding.recyclerList
@@ -56,7 +72,7 @@ class MainActivity : AppCompatActivity(), WishListener {
         builder.setMessage("Are you sure you want to create the wish?")
             .setPositiveButton("Yes") { dialog, id ->
                 val wishText = wishEditText.text.toString()
-                val priorityText = priorityEditText.text.toString()
+                val priorityText = spinner.getSelectedItem().toString()
                 val ownerText = ownerEditText.text.toString()
                 val wishToSave = Wish(null, wishText, priorityText, ownerText)
                 viewModel.saveWish(wishToSave, application)
