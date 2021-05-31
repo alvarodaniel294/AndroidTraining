@@ -4,4 +4,6 @@
     <string name="edit">edit</string>
     <string name="save_wish">Save wish</string>
     <string name="edit_wish">Edit wish</string>
+    <string name="type_your_wish">Type your wish</string>
+    <string name="type_your_name">Type your name</string>
 </resources>
