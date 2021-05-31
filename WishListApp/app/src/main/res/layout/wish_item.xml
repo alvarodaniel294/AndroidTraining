@@ -14,7 +14,8 @@
         app:icon="@drawable/ic_baseline_edit_24"
         app:iconPadding="0dp"
         app:layout_constraintEnd_toStartOf="@id/deleteButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="@color/editButton"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/deleteButton"
@@ -25,7 +26,8 @@
         app:icon="@drawable/ic_baseline_delete_24"
         app:iconPadding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="@color/deleteButton" />
 
     <TextView
         android:id="@+id/wishText"

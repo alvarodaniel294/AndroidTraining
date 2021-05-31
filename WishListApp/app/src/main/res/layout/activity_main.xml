@@ -77,7 +77,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/ownerEditText"
         android:layout_margin="20dp"
-        android:text="@string/save_wish"/>
+        android:text="@string/save_wish" />
 
     <ProgressBar
         android:id="@+id/progressBar"

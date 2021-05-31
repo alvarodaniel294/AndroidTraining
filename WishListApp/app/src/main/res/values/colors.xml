@@ -8,6 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="saveButton">#AA00FF</color>
-    <color name="editButton">#00C853</color>
-    <color name="deleteButton">#D50000</color>
+    <color name="editButton">#00B300</color>
+    <color name="deleteButton">#800000</color>
 </resources>
