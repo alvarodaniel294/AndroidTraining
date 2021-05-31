@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(), WishListener {
 
         wishEditText = binding.wishEditText
         spinner = binding.prioritySpinner
-        ownerEditText = binding.ownerEditList
+        ownerEditText = binding.ownerEditText
 
         progressBar = binding.progressBar
 

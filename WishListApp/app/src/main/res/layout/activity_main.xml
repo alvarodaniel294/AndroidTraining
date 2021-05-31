@@ -62,7 +62,7 @@
         android:textSize="16sp"/>
 
     <EditText
-        android:id="@+id/ownerEditList"
+        android:id="@+id/ownerEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -75,7 +75,7 @@
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/ownerEditList"
+        app:layout_constraintTop_toBottomOf="@+id/ownerEditText"
         android:layout_margin="20dp"
         android:text="@string/save_wish"/>
 

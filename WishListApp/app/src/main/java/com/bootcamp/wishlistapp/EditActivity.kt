@@ -3,18 +3,18 @@ package com.bootcamp.wishlistapp
 import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.Spinner
 import androidx.activity.viewModels
 import com.bootcamp.wishlistapp.databinding.ActivityEditBinding
-import com.bootcamp.wishlistapp.databinding.ActivityMainBinding
 import com.bootcamp.wishlistapp.entities.Wish
 import com.bootcamp.wishlistapp.viewModels.MainViewModel
 
 class EditActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityEditBinding
-    var wishId: Int? = null
+    private lateinit var binding: ActivityEditBinding
+    private var wishId: Int? = null
 
     companion object {
         const val WISHID = "wishId"
@@ -24,7 +24,7 @@ class EditActivity : AppCompatActivity() {
     }
 
     private lateinit var wishEditText: EditText
-    private lateinit var priorityEditText: EditText
+    private lateinit var spinner: Spinner
     private lateinit var ownerEditText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,12 +34,22 @@ class EditActivity : AppCompatActivity() {
 
         wishId = intent.getStringExtra(WISHID)?.toInt()
         binding.wishEditText.setText(intent.getStringExtra(WISHTEXT))
-        binding.priorityEditText.setText(intent.getStringExtra(WISHPRIORITY))
-        binding.ownerEditList.setText(intent.getStringExtra(WISHOWNER))
+        binding.ownerEditText.setText(intent.getStringExtra(WISHOWNER))
 
         wishEditText = binding.wishEditText
-        priorityEditText = binding.priorityEditText
-        ownerEditText = binding.ownerEditList
+        spinner = binding.prioritySpinner
+        ownerEditText = binding.ownerEditText
+
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.priorities_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
 
         binding.editButton.setOnClickListener {
             editWish()
@@ -53,7 +63,7 @@ class EditActivity : AppCompatActivity() {
         builder.setMessage("Are you sure you want to edit the wish?")
             .setPositiveButton("Yes") { dialog, id ->
                 val wishText = wishEditText.text.toString()
-                val priorityText = priorityEditText.text.toString()
+                val priorityText = spinner.getSelectedItem().toString()
                 val ownerText = ownerEditText.text.toString()
                 val wishToSave = Wish(wishId, wishText, priorityText, ownerText)
                 viewModel.saveWish(wishToSave, application)
