@@ -13,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.bootcamp.broadcastapp.broadcast.AirPlaneReceiver
 import com.bootcamp.broadcastapp.broadcast.BatteryConnectionReceiver
+import com.bootcamp.broadcastapp.broadcast.CustomBroadcast
 import com.bootcamp.broadcastapp.broadcast.SMSReceiver
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var airPlaneReceiver: AirPlaneReceiver
     lateinit var batteryConnection: BatteryConnectionReceiver
     lateinit var smsReceiver: SMSReceiver
+    lateinit var customBroadcast: CustomBroadcast
 
 
     val smsPermissionRequest = registerForActivityResult(ActivityResultContracts.RequestPermission()){
@@ -48,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         airPlaneReceiver = AirPlaneReceiver()
         batteryConnection = BatteryConnectionReceiver()
         smsReceiver = SMSReceiver()
+        customBroadcast = CustomBroadcast()
 
 
         IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED).also {
@@ -63,10 +66,28 @@ class MainActivity : AppCompatActivity() {
             registerReceiver(smsReceiver, it)
         }
 
+
+        val intentfilter = IntentFilter("com.bootcamp.broadcastapp.CUSTOM_ACTION")
+
+        registerReceiver(customBroadcast, intentfilter)
+
+
         findViewById<Button>(R.id.smsPermissions).setOnClickListener {
             requestSMSPermissions()
         }
 
+        findViewById<Button>(R.id.sendBroadcastBtn).setOnClickListener {
+            sendCustomBroadcast()
+        }
+
+
+    }
+
+    private fun sendCustomBroadcast() {
+
+        val broadcastIntent = Intent()
+        broadcastIntent.action = "com.bootcamp.broadcastapp.CUSTOM_ACTION"
+        sendBroadcast(broadcastIntent)
     }
 
     private fun requestSMSPermissions() {
@@ -85,5 +106,6 @@ class MainActivity : AppCompatActivity() {
         unregisterReceiver(airPlaneReceiver)
         unregisterReceiver(batteryConnection)
         unregisterReceiver(smsReceiver)
+        unregisterReceiver(customBroadcast)
     }
 }
