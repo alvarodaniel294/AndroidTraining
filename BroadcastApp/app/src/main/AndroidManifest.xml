@@ -3,6 +3,7 @@
     package="com.bootcamp.broadcastapp">
 
     <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:allowBackup="true"
@@ -19,6 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".services.MyService"/>
+        <service android:name=".services.MyForegroundService"/>
+
+        <receiver android:name=".broadcast.AirPlaneReceiver"/>
+
     </application>
 
 </manifest>

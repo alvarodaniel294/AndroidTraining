@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -15,6 +16,8 @@ import com.bootcamp.broadcastapp.broadcast.AirPlaneReceiver
 import com.bootcamp.broadcastapp.broadcast.BatteryConnectionReceiver
 import com.bootcamp.broadcastapp.broadcast.CustomBroadcast
 import com.bootcamp.broadcastapp.broadcast.SMSReceiver
+import com.bootcamp.broadcastapp.services.MyForegroundService
+import com.bootcamp.broadcastapp.services.MyService
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
 
         IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED).also {
-            registerReceiver(AirPlaneReceiver(), it)
+            registerReceiver(airPlaneReceiver, it)
         }
 
 
@@ -80,7 +83,50 @@ class MainActivity : AppCompatActivity() {
             sendCustomBroadcast()
         }
 
+        findViewById<Button>(R.id.startBtn).setOnClickListener {
+            //startMyService()
+            startMyForegroundService()
+        }
+        findViewById<Button>(R.id.stopBtn).setOnClickListener {
+            //stopMyService()
+            stopMyForegroundService()
+        }
 
+    }
+
+    fun startMyForegroundService(){
+        val intentService = Intent(this, MyForegroundService::class.java)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(intentService)
+        }else{
+            startService(intentService)
+        }
+
+    }
+
+    fun stopMyForegroundService(){
+        val intentService = Intent(this, MyForegroundService::class.java)
+        intentService.putExtra("STOP_EXTRA", true)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            startForegroundService(intentService)
+        }else{
+            startService(intentService)
+        }
+    }
+
+    private fun stopMyService() {
+        val intentService = Intent(this, MyService::class.java)
+        stopService(intentService)
+    }
+
+    private fun startMyService() {
+        val intentService = Intent(this, MyService::class.java)
+        intentService.putExtra("SERVICE_EXTRA", "some value")
+
+        startService(intentService)
     }
 
     private fun sendCustomBroadcast() {
