@@ -1,0 +1,2 @@
+rootProject.name = "EmpytMusicApp"
+include ':app'
