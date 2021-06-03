@@ -41,5 +41,9 @@ class MainActivity : AppCompatActivity(), SongListener {
     }
 
     override fun viewSongDetail(song: Song) {
+        val intent = Intent(this, SongDetailActivity::class.java).apply {
+            putExtra(SongDetailActivity.SONG_EXTRA, song)
+        }
+        startActivity(intent)
     }
 }
