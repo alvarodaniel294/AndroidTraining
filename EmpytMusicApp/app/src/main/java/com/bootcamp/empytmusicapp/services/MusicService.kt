@@ -9,12 +9,13 @@ import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.bootcamp.empytmusicapp.MainActivity
 import com.bootcamp.empytmusicapp.R
+import com.bootcamp.empytmusicapp.models.Song
 
 class MusicService: Service() {
     companion object {
         const val STOP_FLAG = "STOP_FLAG"
         const val SERVICE_ID = 3
-        const val SONG_ID_EXTRA = "SONG_ID_EXTRA"
+        const val SONG_EXTRA = "SONG_EXTRA"
     }
     private var songPlayer: MediaPlayer? = null
     override fun onBind(p0: Intent?): IBinder? {
@@ -26,25 +27,24 @@ class MusicService: Service() {
             songPlayer?.release()
             stopForeground(true)
         } else {
-            val songId = intent?.getIntExtra(SONG_ID_EXTRA, -1) ?: -1
-            if (songId != -1) {
+            val song: Song? = intent?.getSerializableExtra(SONG_EXTRA) as Song?
+            song?.let {
                 songPlayer?.release()
-                songPlayer = MediaPlayer.create(baseContext, songId)
+                songPlayer = MediaPlayer.create(baseContext, it.songResourceId)
                 songPlayer?.start()
+                val pendingIntent = Intent(this, MainActivity::class.java).let {
+                    PendingIntent.getActivity(this, 0, it, 0)
+                }
+                registerChannel(this)
+                val notification = NotificationCompat.Builder(this, "musicapp")
+                    .setContentTitle(it.name)
+                    .setContentText(it.author)
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setSmallIcon(R.drawable.ic_play)
+                    .setContentIntent(pendingIntent)
+                    .build()
+                startForeground(SERVICE_ID, notification)
             }
-
-            val pendingIntent = Intent(this, MainActivity::class.java).let {
-                PendingIntent.getActivity(this, 0, it, 0)
-            }
-            registerChannel(this)
-            val notification = NotificationCompat.Builder(this, "musicapp")
-                .setContentTitle("Music")
-                .setContentText("Music App")
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .setContentIntent(pendingIntent)
-                .build()
-            startForeground(SERVICE_ID, notification)
         }
         return START_STICKY
     }

@@ -20,7 +20,7 @@ class SongAdapter(val songList: MutableList<Song>, val listener: SongListener) :
         val songItem = songList[position]
         holder.binding.songName.text = songItem.name
         holder.binding.songAuthor.text = songItem.author
-        holder.binding.songContainer.setOnClickListener {
+        holder.binding.songImage.setOnClickListener {
             listener.playSong(songItem)
         }
     }
