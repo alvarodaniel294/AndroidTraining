@@ -60,8 +60,8 @@ class MainActivity : AppCompatActivity(), SongListener {
         HeadsetReceiver.instance.callback = object : HeadsetReceiver.HeadsetReceiverCallback {
             override fun onHeadsetConnected() {
                 Log.d("HEADPHONES","connected!")
+                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 20, 0)
             }
-
             override fun onHeadsetDisconnected() {
                 Log.d("HEADPHONES","disconnected!")
             }
@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity(), SongListener {
 
 
     override fun onPause() {
-        unregisterReceiver(receiver)
+        HeadsetReceiver.instance.unregister(this)
         super.onPause()
     }
 }
