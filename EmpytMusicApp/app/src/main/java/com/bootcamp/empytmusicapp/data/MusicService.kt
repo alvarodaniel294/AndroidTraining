@@ -29,7 +29,6 @@ class MusicService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-
         val stop = intent?.getBooleanExtra(STOP_EXTRA, false) ?: false
         if (stop) {
             mediaPlayer?.release()
@@ -38,12 +37,6 @@ class MusicService : Service() {
         } else {
             val song: Music? = intent?.getSerializableExtra(SONG_EXTRA) as Music?
             song?.let { song ->
-//                if (mediaPlayer == null){
-//                    kotlin.run {
-//                        mediaPlayer = MediaPlayer.create(baseContext,song.srcMusic)
-//                        mediaPlayer?.start()
-//                    }
-//                }
                 mediaPlayer?.let {
                 } ?: kotlin.run {
                     mediaPlayer = MediaPlayer.create(baseContext, song.srcMusic)
@@ -63,10 +56,8 @@ class MusicService : Service() {
                 .setSmallIcon(R.drawable.ic_stop_circle)
                 .setContentIntent(pendingIntent)
                 .build()
-
             startForeground(SERVICE_ID, notification)
         }
-
         return START_STICKY
     }
     private fun registerChannel(context: Context) {
@@ -75,7 +66,6 @@ class MusicService : Service() {
                 NotificationChannel("bootcamp", "bootcamp", NotificationManager.IMPORTANCE_LOW)
             channel.description = "asdf"
             channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
-
             val notificationManager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
