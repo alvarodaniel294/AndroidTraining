@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">EmpytMusicApp</string>
+    <string name="song_name_example">Song Name Example</string>
+    <string name="song_author_example">Song Author Example</string>
 </resources>
