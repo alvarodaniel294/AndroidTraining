@@ -40,14 +40,6 @@ class MainActivity : AppCompatActivity(), SongListener {
         }
     }
 
-    override fun stopSong(song: Song) {
-        val intent = Intent(this, MusicService::class.java)
-        intent.putExtra(MusicService.STOP_FLAG, true)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(intent)
-        }
-    }
-
     override fun viewSongDetail(song: Song) {
     }
 }

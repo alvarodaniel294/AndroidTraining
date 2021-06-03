@@ -23,6 +23,9 @@ class SongAdapter(val songList: MutableList<Song>, val listener: SongListener) :
         holder.binding.songImage.setOnClickListener {
             listener.playSong(songItem)
         }
+        holder.binding.songContainer.setOnClickListener {
+            listener.viewSongDetail(songItem)
+        }
     }
     override fun getItemCount(): Int {
         return songList.size
