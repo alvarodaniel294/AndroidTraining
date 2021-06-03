@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity(), SongListener {
 
     override fun playSong(song: Song) {
         val intent = Intent(this, MusicService::class.java)
+        intent.putExtra(MusicService.SONG_ID_EXTRA, song.songResourceId)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(intent)
         }
