@@ -30,35 +30,26 @@ class MusicService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
         val stop = intent?.getBooleanExtra(STOP_EXTRA, false) ?: false
-
         if (stop) {
-
             songPlayer?.release()
             songPlayer = null
             stopForeground(true)
         } else {
             val songId = intent?.getIntExtra(SONG_ID_EXTRA, -1)
             val song: Song? = intent?.getSerializableExtra(SONG_EXTRA) as Song?
-
             song?.let { song ->
                 songPlayer?.let {
-
                 } ?: kotlin.run {
                     songPlayer = MediaPlayer.create(baseContext, song.songResourceId)
                     songPlayer?.start()
                 }
             }
-
-
             val pendingIntent = Intent(this, MainActivity::class.java).let {
                 PendingIntent.getActivity(this, 0, it, 0)
             }
-
             registerChannel(this)
-
             val title = song?.title ?: "Bootcamp Mobile"
             val desc = song?.artist ?: "Second foreground service"
-
             val notification = NotificationCompat.Builder(this, "bootcamp")
                 .setContentTitle(title)
                 .setContentText(desc)

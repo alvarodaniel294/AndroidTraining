@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun playSong() {
-
         val intentF = Intent(this, MusicService::class.java)
         intentF.putExtra(MusicService.SONG_ID_EXTRA, song.songResourceId)
         intentF.putExtra(MusicService.SONG_EXTRA, song)
