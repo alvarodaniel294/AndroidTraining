@@ -29,20 +29,15 @@ class MainActivity : AppCompatActivity(),IMusic {
 
     fun initRecyclerView(){
         musicItemRecycler = activityBinding.rvMusicItem
-        val musicList = listOf<Music>(
-            Music(1,"epic rap","09/05/2000", R.raw.epic_rap1),
-            Music(2,"epic rap2","09/05/1980", R.raw.epic_rap1),
-            Music(3,"epic rap3","09/05/1980", R.raw.epic_rap1),
-        )
         musicItemRecycler.layoutManager = LinearLayoutManager(this)
-        musicItemRecycler.adapter = MusicAdapter(musicList,this)
+        musicItemRecycler.adapter = MusicAdapter(Music.musicList,this)
     }
 
     override fun didSelectCardView(music: Music) {
         val myIntent = Intent(this, MusicService::class.java)
         myIntent.putExtra(MusicService.SONG_EXTRA, music)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            Toast.makeText(this,"hola musica",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"musica: ${music.nombre}",Toast.LENGTH_SHORT).show()
             startForegroundService(myIntent)
         }
     }

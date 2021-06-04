@@ -12,8 +12,7 @@ data class Music(
     companion object {
         val musicList = listOf<Music>(
             Music(1,"epic rap","09/05/2000", R.raw.epic_rap1),
-            Music(2,"epic rap2","09/05/1980", R.raw.epic_rap1),
-            Music(3,"epic rap3","09/05/1980", R.raw.epic_rap1),
+            Music(2,"epic rap2","09/05/1980", R.raw.epic_philosopher)
         )
     }
 }

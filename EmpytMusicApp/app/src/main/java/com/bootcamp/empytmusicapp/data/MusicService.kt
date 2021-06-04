@@ -6,6 +6,7 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.bootcamp.empytmusicapp.MainActivity
 import com.bootcamp.empytmusicapp.R
@@ -31,11 +32,12 @@ class MusicService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val stop = intent?.getBooleanExtra(STOP_EXTRA, false) ?: false
         if (stop) {
-            mediaPlayer?.release()
-            mediaPlayer = null
-            stopForeground(true)
+            stopMyMusic()
         } else {
             val song: Music? = intent?.getSerializableExtra(SONG_EXTRA) as Music?
+            if(mediaPlayer != null){
+                stopMyMusic()
+            }
             song?.let { song ->
                 mediaPlayer?.let {
                 } ?: kotlin.run {
@@ -60,6 +62,13 @@ class MusicService : Service() {
         }
         return START_STICKY
     }
+
+    fun stopMyMusic(){
+        mediaPlayer?.release()
+        mediaPlayer = null
+        stopForeground(true)
+    }
+
     private fun registerChannel(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel =
