@@ -1,13 +1,13 @@
 package com.bootcamp.empytmusicapp
 
-import android.R
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.media.AudioManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.appcompat.app.AppCompatActivity
@@ -44,6 +44,10 @@ class MainActivity : AppCompatActivity(), SongListener {
             stopSong()
         }
         initSeekbar()
+
+        val receiverFilter = IntentFilter(Intent.ACTION_HEADSET_PLUG)
+        val receiver = HeadSetReceiver()
+        registerReceiver(receiver, receiverFilter)
     }
 
     private fun stopSong() {
@@ -101,6 +105,22 @@ class MainActivity : AppCompatActivity(), SongListener {
             })
         } catch (e: Exception) {
             e.printStackTrace()
+        }
+    }
+}
+
+private class HeadSetReceiver : BroadcastReceiver() {
+    override fun onReceive(context: Context, intent: Intent) {
+        if (intent.action == Intent.ACTION_HEADSET_PLUG) {
+            val state = intent.getIntExtra("state", -1)
+            when (state) {
+                0 -> {
+                    Log.d("HEADSET", "Headset unplugged")
+                }
+                1 -> {
+                    Log.d("HEADSET", "Headset plugged")
+                }
+            }
         }
     }
 }
