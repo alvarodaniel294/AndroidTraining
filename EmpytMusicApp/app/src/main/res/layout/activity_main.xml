@@ -17,7 +17,7 @@
         android:id="@+id/playingSongFragment"
         android:name="com.bootcamp.empytmusicapp.PlayingSongFragment"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="200dp"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
