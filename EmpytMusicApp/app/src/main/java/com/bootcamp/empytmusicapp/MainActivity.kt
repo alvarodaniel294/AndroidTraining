@@ -28,6 +28,9 @@ class MainActivity : AppCompatActivity(), SongListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         headSetIntentReceiver = HeadSetIntentReceiver()
+        IntentFilter(Intent.ACTION_HEADSET_PLUG).also {
+            registerReceiver(headSetIntentReceiver, it)
+        }
         songList = Song.getSongList()
         recyclerView = binding.recycler
         recyclerView.layoutManager = LinearLayoutManager(this)
