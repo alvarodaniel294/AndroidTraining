@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
             stopSong()
         }
 
-
     }
 
     private fun stopSong() {
