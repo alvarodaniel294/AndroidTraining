@@ -13,20 +13,39 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_album"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/songName"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:layout_constraintTop_toBottomOf="@+id/songImage"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20dp"
+        android:gravity="center"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/songAuthor"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:layout_constraintTop_toBottomOf="@+id/songName"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20dp"
+        android:gravity="center"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/songReleaseYear"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/songAuthor"
+        android:layout_margin="20dp"
+        android:gravity="center"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/songAlbumName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/songReleaseYear"
+        android:layout_margin="20dp"
+        android:gravity="center"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

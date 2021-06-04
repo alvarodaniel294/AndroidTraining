@@ -18,6 +18,6 @@ class SongDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
         song = intent.getSerializableExtra(SONG_EXTRA) as Song
         binding.songName.text = song.name
-        binding.songAuthor.text = song.author
+        binding.songAuthor.text = "Single by ${song.author}"
     }
 }

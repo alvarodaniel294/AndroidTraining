@@ -11,10 +11,10 @@ data class Song(
     companion object {
         fun getSongList():MutableList<Song> {
             val songList = mutableListOf<Song>()
-            songList.add(Song("Justin Bieber", "Peaches", R.raw.justinbieber_peaches))
-            songList.add(Song("The Weekend", "Save your tears", R.raw.theweekend_saveyourtears))
-            songList.add(Song("Billie Eilish", "Bad guy", R.raw.billieeilish_badguy))
-            songList.add(Song("The Weekend", "Blinding lights", R.raw.theweekend_blindinglights))
+            songList.add(Song("Peaches", "Justin Bieber", R.raw.justinbieber_peaches))
+            songList.add(Song("Save your tears","The Weekend",  R.raw.theweekend_saveyourtears, ))
+            songList.add(Song("Bad guy","Billie Eilish",  R.raw.billieeilish_badguy))
+            songList.add(Song("Blinding lights","The Weekend",  R.raw.theweekend_blindinglights))
             return songList
         }
     }
