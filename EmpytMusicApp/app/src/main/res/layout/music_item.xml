@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/containerMusicItem">
 
     <TextView
         android:id="@+id/rTitle"
@@ -11,8 +12,9 @@
         android:text="Title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         android:layout_margin="16dp"
+        android:textSize="16dp"
+        android:textStyle="bold"
         />
     <TextView
         android:id="@+id/rArtist"
@@ -21,8 +23,19 @@
         android:text="Title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rTitle"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="16dp"
         />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rArtist"
+        android:layout_marginHorizontal="16dp"
+        android:background="#808080"
+        android:layout_marginTop="8dp"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

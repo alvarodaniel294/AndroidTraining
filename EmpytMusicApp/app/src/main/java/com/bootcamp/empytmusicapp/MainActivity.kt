@@ -10,12 +10,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bootcamp.empytmusicapp.adapter.MusicAdapter
 import com.bootcamp.empytmusicapp.databinding.ActivityMainBinding
+import com.bootcamp.empytmusicapp.models.ListItemClickListener
 import com.bootcamp.empytmusicapp.models.Song
 import com.bootcamp.empytmusicapp.services.MusicService
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ListItemClickListener {
     lateinit var binding: ActivityMainBinding
-    lateinit var  song: Song
+    var  song = listOf<Song>(
+        Song("reptile", "skrillex", R.raw.skrillex_reptile),
+        Song("The Nights", "Avicii", R.raw.avicii_thenights),
+        Song("Wake me up", "Avicii", R.raw.avicii_wakeneup)  ,
+    )
 
     lateinit var recycler: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,9 +28,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         recycler = binding.musicRecycler
-//        song = Song("reptile", "skrillex", R.raw.skrillex_reptile)
-//        song = Song("The Nights", "Avicii", R.raw.avicii_thenights)
-        song = Song("Wake me up", "Avicii", R.raw.avicii_wakeneup)
+
 
 
         binding.playBtn.setOnClickListener{
@@ -46,7 +49,8 @@ class MainActivity : AppCompatActivity() {
 
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.setHasFixedSize(true)
-        recycler.adapter = MusicAdapter(mutableListOf(), application)
+
+        recycler.adapter = MusicAdapter(song, this)
     }
     private fun stopSong(){
         val intentF = Intent(this, MusicService::class.java)
@@ -54,9 +58,19 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             startForegroundService(intentF)
         }
-
     }
+
     private fun playSong(){
+        val intentF = Intent(this, MusicService::class.java)
+        intentF.putExtra(MusicService.SONG_ID_EXTRA, song[0].songResourceId)
+        intentF.putExtra(MusicService.SONG_EXTRA, song[0])
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(intentF)
+        }
+    }
+    override fun onListItemClick(song: Song) {
+        binding.musicTitle.text = song.title
+        binding.musicArtist.text = song.artist
         val intentF = Intent(this, MusicService::class.java)
         intentF.putExtra(MusicService.SONG_ID_EXTRA, song.songResourceId)
         intentF.putExtra(MusicService.SONG_EXTRA, song)
@@ -64,7 +78,5 @@ class MainActivity : AppCompatActivity() {
             startForegroundService(intentF)
         }
     }
-    fun onTapMusic(song: Song){
 
-    }
 }

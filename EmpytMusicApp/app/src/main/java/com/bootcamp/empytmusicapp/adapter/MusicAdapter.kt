@@ -8,13 +8,15 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bootcamp.empytmusicapp.R
+import com.bootcamp.empytmusicapp.models.ListItemClickListener
 import com.bootcamp.empytmusicapp.models.Song
 
 
-class MusicAdapter(val list: List<Song>, val application: Application): RecyclerView.Adapter<MusicAdapter.MusicViewHolder>() {
+class MusicAdapter(val list: List<Song>,  var listener: ListItemClickListener): RecyclerView.Adapter<MusicAdapter.MusicViewHolder>() {
     class MusicViewHolder(v: View): RecyclerView.ViewHolder(v){
         val title = v.findViewById<TextView>(R.id.rTitle)
-        val artist = v.findViewById<Button>(R.id.rArtist)
+        val artist = v.findViewById<TextView>(R.id.rArtist)
+        val container = v.findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.containerMusicItem)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicViewHolder {
@@ -26,6 +28,9 @@ class MusicAdapter(val list: List<Song>, val application: Application): Recycler
         val item = list[position]
         holder.title.text = item.title
         holder.artist.text = item.artist
+        holder.container.setOnClickListener {
+            listener.onListItemClick(item)
+        }
     }
 
     override fun getItemCount(): Int {
