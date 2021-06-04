@@ -11,7 +11,6 @@ class DetailMusic : AppCompatActivity() {
 
         val message = intent.getStringExtra("DETAIL")
 
-        // Capture the layout's TextView and set the string as its text
         val textView = findViewById<TextView>(R.id.textView).apply {
             text = message
         }
