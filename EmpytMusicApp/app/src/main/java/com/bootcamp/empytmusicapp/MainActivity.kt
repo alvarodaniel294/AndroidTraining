@@ -1,6 +1,7 @@
 package com.bootcamp.empytmusicapp
 
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +10,7 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bootcamp.empytmusicapp.adapters.SongAdapter
+import com.bootcamp.empytmusicapp.broadcastReceivers.HeadSetIntentReceiver
 import com.bootcamp.empytmusicapp.databinding.ActivityMainBinding
 import com.bootcamp.empytmusicapp.listeners.SongListener
 import com.bootcamp.empytmusicapp.models.Song
@@ -20,11 +22,12 @@ class MainActivity : AppCompatActivity(), SongListener {
     private lateinit var recyclerView: RecyclerView
     lateinit var songList: MutableList<Song>
     private val viewModel: SongViewModel by viewModels()
+    private lateinit var headSetIntentReceiver : HeadSetIntentReceiver
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        headSetIntentReceiver = HeadSetIntentReceiver()
         songList = Song.getSongList()
         recyclerView = binding.recycler
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -45,5 +48,10 @@ class MainActivity : AppCompatActivity(), SongListener {
             putExtra(SongDetailActivity.SONG_EXTRA, song)
         }
         startActivity(intent)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(headSetIntentReceiver)
     }
 }
