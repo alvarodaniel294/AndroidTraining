@@ -5,5 +5,5 @@ import com.bootcamp.empytmusicapp.data.model.Music
 interface IMusic {
     fun didSelectCardView(music: Music)
     fun didStopButtonPressed()
-    fun didInfoButtonPressed()
+    fun didInfoButtonPressed(music: Music)
 }

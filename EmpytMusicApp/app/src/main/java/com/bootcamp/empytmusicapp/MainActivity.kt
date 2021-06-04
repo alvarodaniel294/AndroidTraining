@@ -19,6 +19,9 @@ class MainActivity : AppCompatActivity(),IMusic {
 
     lateinit var activityBinding: ActivityMainBinding
     lateinit var musicItemRecycler: RecyclerView
+    companion object{
+        const val SONG_ID = "SONG_ID"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,8 +53,11 @@ class MainActivity : AppCompatActivity(),IMusic {
         }
     }
 
-    override fun didInfoButtonPressed() {
-        //TODO: implementa la transicion de fragemento
+    override fun didInfoButtonPressed(music: Music) {
+        Toast.makeText(this,"hola dato fue presionado",Toast.LENGTH_SHORT).show()
+        val myBundle = Bundle()
+        myBundle.putString(SONG_ID,music.id.toString())
+        val intent = Intent(this,MainActivity2::class.java)
     }
 
 }
