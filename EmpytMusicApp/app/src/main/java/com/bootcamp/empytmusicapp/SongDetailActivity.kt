@@ -3,9 +3,12 @@ package com.bootcamp.empytmusicapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bootcamp.empytmusicapp.databinding.ActivitySongDetailBinding
+import com.bootcamp.empytmusicapp.models.Song
+import com.bootcamp.empytmusicapp.services.MusicService
 
 class SongDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySongDetailBinding
+    private lateinit var song: Song
     companion object {
         const val SONG_EXTRA = "SONG_EXTRA"
     }
@@ -13,7 +16,8 @@ class SongDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySongDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.songName
+        song = intent.getSerializableExtra(SONG_EXTRA) as Song
+        binding.songName.text = song.name
+        binding.songAuthor.text = song.author
     }
 }
