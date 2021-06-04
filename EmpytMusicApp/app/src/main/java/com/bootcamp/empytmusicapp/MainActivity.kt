@@ -71,6 +71,13 @@ class MainActivity : AppCompatActivity(), SongListener {
         Log.d("MAIN",song.artist)
     }
 
+    override fun onClickToWatchDetail(song: Song) {
+        val intent = Intent(this, DetailMusic::class.java).apply {
+            putExtra("DETAIL", "song.artist")
+        }
+        startActivity(intent)
+    }
+
     private fun initSeekbar() {
         try {
             audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager

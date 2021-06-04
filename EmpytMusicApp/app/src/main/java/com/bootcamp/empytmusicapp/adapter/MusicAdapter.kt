@@ -19,6 +19,7 @@ class SongAdapter (val list:List<Song>,val listener: SongListener): RecyclerView
         val nane = v.findViewById<TextView>(R.id.songName)
         val description = v.findViewById<TextView>(R.id.songDescription)
         val cardview = v.findViewById<CardView>(R.id.songCardView)
+        val watchDetailMusic = v.findViewById<Button>(R.id.watchDetailMusic)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongViewHolder {
@@ -33,6 +34,9 @@ class SongAdapter (val list:List<Song>,val listener: SongListener): RecyclerView
         holder.description.text = item.artist
         holder.cardview.setOnClickListener {
             listener.onClickToPlay(item)
+        }
+        holder.watchDetailMusic.setOnClickListener {
+            listener.onClickToWatchDetail(item)
         }
     }
 
