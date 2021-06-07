@@ -27,10 +27,6 @@ class MainActivity : AppCompatActivity(), SongListener {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        headSetIntentReceiver = HeadSetIntentReceiver()
-        IntentFilter(Intent.ACTION_HEADSET_PLUG).also {
-            registerReceiver(headSetIntentReceiver, it)
-        }
         songList = Song.getSongList()
         recyclerView = binding.recycler
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -51,6 +47,14 @@ class MainActivity : AppCompatActivity(), SongListener {
             putExtra(SongDetailActivity.SONG_EXTRA, song)
         }
         startActivity(intent)
+    }
+
+    override fun onResume() {
+        headSetIntentReceiver = HeadSetIntentReceiver()
+        IntentFilter(Intent.ACTION_HEADSET_PLUG).also {
+            registerReceiver(headSetIntentReceiver, it)
+        }
+        super.onResume()
     }
 
     override fun onStop() {

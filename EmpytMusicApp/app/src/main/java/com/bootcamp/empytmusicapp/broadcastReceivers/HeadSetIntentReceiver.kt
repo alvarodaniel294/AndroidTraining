@@ -11,7 +11,6 @@ import android.widget.Toast
 
 class HeadSetIntentReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-        Log.d("Headset Plugged", "Received")
         intent?.let {
             if (it.action.equals(Intent.ACTION_HEADSET_PLUG)) {
                 val isConnected = intent?.getIntExtra("state", -1)

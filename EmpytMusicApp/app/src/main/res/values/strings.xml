@@ -4,4 +4,7 @@
     <string name="song_author_example">Song Author Example</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="singleBy">Single by %1$s</string>
+    <string name="releasedIn">Released in %1$s</string>
+    <string name="fromAlbum">From album %1$s</string>
 </resources>

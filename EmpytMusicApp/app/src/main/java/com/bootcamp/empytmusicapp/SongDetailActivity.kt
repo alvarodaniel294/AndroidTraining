@@ -17,7 +17,10 @@ class SongDetailActivity : AppCompatActivity() {
         binding = ActivitySongDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         song = intent.getSerializableExtra(SONG_EXTRA) as Song
+        binding.songImage.setImageResource(song.imageResourceId)
         binding.songName.text = song.name
-        binding.songAuthor.text = "Single by ${song.author}"
+        binding.songAuthor.text = getString(R.string.singleBy, song.author)
+        binding.songReleaseYear.text = getString(R.string.releasedIn, song.releaseYear)
+        binding.songAlbumName.text = getString(R.string.fromAlbum, song.album)
     }
 }
