@@ -11,7 +11,10 @@
     android:layout_height="100dp"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintRight_toLeftOf="@id/stopBtn"/>
+    app:layout_constraintRight_toLeftOf="@id/stopBtn"
+    android:value="20.0"
+    android:valueFrom="0.0"
+    android:valueTo="100.0"/>
     <Button
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"

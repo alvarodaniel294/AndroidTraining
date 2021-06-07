@@ -29,11 +29,9 @@ class MusicService: Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
         val stop = intent?.getBooleanExtra(STOP_EXTRA, false) ?: false
-
+        songPlayer?.release()
+        songPlayer = null
         if (stop) {
-
-            songPlayer?.release()
-            songPlayer = null
             stopForeground(true)
         } else {
             val songId = intent?.getIntExtra(SONG_ID_EXTRA, -1)
