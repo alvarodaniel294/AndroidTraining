@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Motion-Data</string>
+    <string name="my_title">My title</string>
+    <string name="loremipsum">What is Loremajority have suffered alteration in some form, by injected humour, or randomised words which d even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</string>
+    <string name="title_activity_data_store">DataStoreActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+</resources>

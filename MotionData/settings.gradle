@@ -1,0 +1,2 @@
+rootProject.name = "Motion-Data"
+include ':app'
