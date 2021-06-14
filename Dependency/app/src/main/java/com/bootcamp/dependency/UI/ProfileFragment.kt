@@ -1,12 +1,14 @@
-package com.bootcamp.dependency
+package com.bootcamp.dependency.UI
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bootcamp.dependency.R
 
-class MovieDetailFragment : Fragment() {
+
+class ProfileFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +21,7 @@ class MovieDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movie_detail, container, false)
+        return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
 }
