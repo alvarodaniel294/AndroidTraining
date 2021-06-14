@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MovieDetailFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageVideo"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/imageVideo"
+            android:layout_margin="16dp"
+            tools:text="Title"
+            android:textStyle="bold"
+            style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
+            android:textColor="@color/white"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
