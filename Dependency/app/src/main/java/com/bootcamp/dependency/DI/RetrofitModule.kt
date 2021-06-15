@@ -25,7 +25,7 @@ object RetrofitModule {
     @Singleton
     @Provides
     fun provideRetrofit(gson: Gson): Retrofit.Builder {
-        return Retrofit.Builder().baseUrl("asdf")
+        return Retrofit.Builder().baseUrl("https://api.themoviedb.org/3/movie/")
             .addConverterFactory(GsonConverterFactory.create(gson))
     }
 
