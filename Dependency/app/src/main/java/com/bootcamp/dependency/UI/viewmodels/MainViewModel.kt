@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bootcamp.dependency.DB.entities.MovieStorageEntity
 import com.bootcamp.dependency.Utils.DataState
+import com.bootcamp.dependency.models.MovieDetailResponse
 import com.bootcamp.dependency.models.MoviesResponse
 import com.bootcamp.dependency.repository.MoviesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,9 +22,13 @@ constructor(
     val repository: MoviesRepository
 ):ViewModel() {
 
-    private val _moviesDataState:MutableLiveData<DataState<MoviesResponse>> = MutableLiveData()
-    val moviesDataState:LiveData<DataState<MoviesResponse>>
+    private val _moviesDataState:MutableLiveData<DataState<List<MovieStorageEntity>>> = MutableLiveData()
+    val moviesDataState:LiveData<DataState<List<MovieStorageEntity>>>
         get() = _moviesDataState
+
+    private val _movieDetail:MutableLiveData<DataState<MovieDetailResponse>> = MutableLiveData()
+    val movieDetail:LiveData<DataState<MovieDetailResponse>>
+        get() = _movieDetail
 
 
     fun getMoviesFromServer(event: MainViewModelStateEvent){
@@ -40,10 +46,19 @@ constructor(
         }
     }
 
+    fun getMovieDetail(id:Long){
+        viewModelScope.launch {
+            repository.getMovieDetail(id).onEach {
+                _movieDetail.value = it
+            }.launchIn(viewModelScope)
+         }
+    }
+
 
 }
 
 sealed class MainViewModelStateEvent{
     object GetMoviesEvent:MainViewModelStateEvent()
+
     object None: MainViewModelStateEvent()
 }

@@ -1,4 +1,4 @@
-package com.bootcamp.dependency.UI
+package com.bootcamp.dependency.UI.home
 
 import android.os.Bundle
 import android.util.Log
@@ -9,21 +9,30 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bootcamp.dependency.DB.entities.MovieStorageEntity
 import com.bootcamp.dependency.R
 import com.bootcamp.dependency.UI.viewmodels.MainViewModel
 import com.bootcamp.dependency.UI.viewmodels.MainViewModelStateEvent
 import com.bootcamp.dependency.Utils.DataState
-import com.bootcamp.dependency.models.MoviesResponse
+import com.bootcamp.dependency.databinding.FragmentMainBinding
+import com.bootcamp.dependency.interfaces.MovieListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), MovieListener {
 
     companion object {
         const val TAG = "MainFragment"
     }
 
-    private val viewModel:MainViewModel by hiltNavGraphViewModels(R.id.nav_graph)
+    var _binding:FragmentMainBinding? = null
+    private val binding get() = _binding!!
+    lateinit var nowPlayingAdapter: HomeMovieAdapter
+
+
+    private val viewModel: MainViewModel by hiltNavGraphViewModels(R.id.nav_graph)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +44,8 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,17 +53,26 @@ class MainFragment : Fragment() {
 
         viewModel.getMoviesFromServer(MainViewModelStateEvent.GetMoviesEvent)
         subscribeObservers()
+        setupNowPlayingRecycler()
+
+    }
+
+    private fun setupNowPlayingRecycler() {
+        binding.nowPlayingRecycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        nowPlayingAdapter = HomeMovieAdapter(this)
+        binding.nowPlayingRecycler.adapter = nowPlayingAdapter
     }
 
     private fun subscribeObservers() {
         viewModel.moviesDataState.observe(viewLifecycleOwner, Observer { dataState ->
-            when(dataState){
-                is DataState.Success<MoviesResponse> ->{
-                    dataState.data.moviesList.forEach { movie ->
+            when (dataState) {
+                is DataState.Success<List<MovieStorageEntity>> -> {
+                    dataState.data.forEach { movie ->
                         Log.d(TAG, movie.title)
                     }
+                    nowPlayingAdapter.movies = dataState.data
                 }
-                is DataState.Error ->{
+                is DataState.Error -> {
                     Toast.makeText(requireContext(), "error", Toast.LENGTH_SHORT).show()
                 }
                 is DataState.Loading -> {
@@ -62,6 +81,18 @@ class MainFragment : Fragment() {
             }
 
         })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+    override fun onMovieTap(id: Long) {
+
+        val bundle = Bundle()
+        bundle.putLong("MOVIE_ID", id)
+        findNavController().navigate(R.id.action_mainFragment_to_movieDetailFragment, bundle)
     }
 
 }

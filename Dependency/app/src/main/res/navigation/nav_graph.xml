@@ -12,14 +12,18 @@
         tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/movieDetailFragment"
-        android:name="com.bootcamp.dependency.UI.MovieDetailFragment"
+        android:name="com.bootcamp.dependency.UI.home.MovieDetailFragment"
         android:label="fragment_movie_detail"
         tools:layout="@layout/fragment_movie_detail" />
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.bootcamp.dependency.UI.MainFragment"
+        android:name="com.bootcamp.dependency.UI.home.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.bootcamp.dependency.UI.ProfileFragment"
