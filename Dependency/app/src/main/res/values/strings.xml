@@ -8,4 +8,5 @@
     <string name="top_rated">Top Rated</string>
     <string name="total_votes">Total Votes: %1$s</string>
     <string name="average_votes">Avg: %1$s</string>
+    <string name="movies_channel">MovieApp</string>
 </resources>

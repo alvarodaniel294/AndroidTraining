@@ -141,6 +141,8 @@ class MainFragment : Fragment(), MovieListener {
 
     override fun onMovieTap(id: Long) {
 
+//        throw RuntimeException("Test Crash"); // Force a crash
+
         val bundle = Bundle()
         bundle.putLong("MOVIE_ID", id)
         findNavController().navigate(R.id.action_mainFragment_to_movieDetailFragment, bundle)
