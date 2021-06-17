@@ -25,12 +25,16 @@ constructor(
                 networkMovies.body()?.let { response ->
                     response.moviesList.forEach { movieResponse ->
                         val movie = MovieStorageEntity(
+                            "${movieResponse.id}_nowPlaying",
                             movieResponse.id,
                             movieResponse.language,
                             movieResponse.title,
                             movieResponse.backdropPath,
                             movieResponse.overview,
-                            movieResponse.poster
+                            movieResponse.poster,
+                            isNowPlaying = true,
+                            isUpcoming = false,
+                            isTopRated = false
                         )
                         movieDao.saveMovie(movie)
                     }
@@ -41,6 +45,78 @@ constructor(
         }catch (e:Exception){
             val exception = e
             val moviesFromDB = movieDao.getMoviesNowPlaying()
+            emit(DataState.Success(moviesFromDB))
+        }
+
+    }.catch { error ->
+        emit(DataState.Error(Exception(error)))
+    }
+
+    suspend fun getUpComingMovies(): Flow<DataState<List<MovieStorageEntity>>> = flow {
+        emit(DataState.Loading)
+
+        try {
+            val networkMovies = retrofitService.getUpComingMovies()
+            if (networkMovies.isSuccessful) {
+                networkMovies.body()?.let { response ->
+                    response.moviesList.forEach { movieResponse ->
+                        val movie = MovieStorageEntity(
+                            "${movieResponse.id}_upComing",
+                            movieResponse.id,
+                            movieResponse.language,
+                            movieResponse.title,
+                            movieResponse.backdropPath,
+                            movieResponse.overview,
+                            movieResponse.poster,
+                            isNowPlaying = false,
+                            isUpcoming = true,
+                            isTopRated = false
+                        )
+                        movieDao.saveMovie(movie)
+                    }
+                    val moviesFromDB = movieDao.getUpcomingMovies()
+                    emit(DataState.Success(moviesFromDB))
+                }
+            }
+        }catch (e:Exception){
+            val exception = e
+            val moviesFromDB = movieDao.getUpcomingMovies()
+            emit(DataState.Success(moviesFromDB))
+        }
+
+    }.catch { error ->
+        emit(DataState.Error(Exception(error)))
+    }
+
+    suspend fun getTopRatedMovies(): Flow<DataState<List<MovieStorageEntity>>> = flow {
+        emit(DataState.Loading)
+
+        try {
+            val networkMovies = retrofitService.getTopRatedMovies()
+            if (networkMovies.isSuccessful) {
+                networkMovies.body()?.let { response ->
+                    response.moviesList.forEach { movieResponse ->
+                        val movie = MovieStorageEntity(
+                            "${movieResponse.id}_topRated",
+                            movieResponse.id,
+                            movieResponse.language,
+                            movieResponse.title,
+                            movieResponse.backdropPath,
+                            movieResponse.overview,
+                            movieResponse.poster,
+                            isNowPlaying = false,
+                            isUpcoming = false,
+                            isTopRated = true
+                        )
+                        movieDao.saveMovie(movie)
+                    }
+                    val moviesFromDB = movieDao.getTopRatedMovies()
+                    emit(DataState.Success(moviesFromDB))
+                }
+            }
+        }catch (e:Exception){
+            val exception = e
+            val moviesFromDB = movieDao.getTopRatedMovies()
             emit(DataState.Success(moviesFromDB))
         }
 

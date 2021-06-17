@@ -22,9 +22,19 @@ constructor(
     val repository: MoviesRepository
 ):ViewModel() {
 
+
+
     private val _moviesDataState:MutableLiveData<DataState<List<MovieStorageEntity>>> = MutableLiveData()
     val moviesDataState:LiveData<DataState<List<MovieStorageEntity>>>
         get() = _moviesDataState
+
+    private val _upcomingMoviesDataState:MutableLiveData<DataState<List<MovieStorageEntity>>> = MutableLiveData()
+    val upcomingMoviesDataState:LiveData<DataState<List<MovieStorageEntity>>>
+        get() = _upcomingMoviesDataState
+
+    private val _topRatedMoviesDataState:MutableLiveData<DataState<List<MovieStorageEntity>>> = MutableLiveData()
+    val topRatedMoviesDataState:LiveData<DataState<List<MovieStorageEntity>>>
+        get() = _topRatedMoviesDataState
 
     private val _movieDetail:MutableLiveData<DataState<MovieDetailResponse>> = MutableLiveData()
     val movieDetail:LiveData<DataState<MovieDetailResponse>>
@@ -37,6 +47,14 @@ constructor(
                 is MainViewModelStateEvent.GetMoviesEvent ->{
                     repository.getMovies().onEach { dataState ->
                         _moviesDataState.value = dataState
+                    }.launchIn(viewModelScope)
+
+                    repository.getUpComingMovies().onEach { dataState ->
+                        _upcomingMoviesDataState.value = dataState
+                    }.launchIn(viewModelScope)
+
+                    repository.getTopRatedMovies().onEach { dataState ->
+                        _topRatedMoviesDataState.value = dataState
                     }.launchIn(viewModelScope)
                 }
                 else ->{

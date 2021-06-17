@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bootcamp.dependency.DB.entities.MovieStorageEntity
+import com.bootcamp.dependency.Utils.Constants
 import com.bootcamp.dependency.databinding.MovieItemBinding
 import com.bootcamp.dependency.interfaces.MovieListener
 import com.bumptech.glide.Glide
@@ -59,7 +60,7 @@ class HomeMovieAdapter(val listener:MovieListener):RecyclerView.Adapter<HomeMovi
         holder.binding.title.text = item.title
         Glide
             .with(context)
-            .load("https://image.tmdb.org/t/p/w500/${item.poster}")
+            .load("${Constants.IMAGE_PATH}${item.poster}")
             .centerCrop()
 //            .placeholder(R.drawable.loading_spinner)
             .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)

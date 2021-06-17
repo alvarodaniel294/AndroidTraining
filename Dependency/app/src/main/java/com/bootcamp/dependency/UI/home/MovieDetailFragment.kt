@@ -12,10 +12,13 @@ import androidx.lifecycle.Observer
 import com.bootcamp.dependency.DB.entities.MovieStorageEntity
 import com.bootcamp.dependency.R
 import com.bootcamp.dependency.UI.viewmodels.MainViewModel
+import com.bootcamp.dependency.Utils.Constants
 import com.bootcamp.dependency.Utils.DataState
 import com.bootcamp.dependency.databinding.FragmentMainBinding
 import com.bootcamp.dependency.databinding.FragmentMovieDetailBinding
 import com.bootcamp.dependency.models.MovieDetailResponse
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 class MovieDetailFragment : Fragment() {
 
@@ -54,7 +57,7 @@ class MovieDetailFragment : Fragment() {
         viewModel.movieDetail.observe(viewLifecycleOwner, Observer { dataState ->
             when (dataState) {
                 is DataState.Success<MovieDetailResponse> -> {
-                    binding.movieTitle.text = dataState.data.overview
+                    setUpMovie(dataState.data)
                 }
                 is DataState.Error -> {
                     Toast.makeText(requireContext(), "error", Toast.LENGTH_SHORT).show()
@@ -64,6 +67,34 @@ class MovieDetailFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun setUpMovie(movie: MovieDetailResponse) {
+        binding.movieTitle.text = movie.originalTitle
+        binding.posterImage.let {
+            Glide
+                .with(requireContext())
+                .load("${Constants.IMAGE_PATH}${movie.backdropPath}")
+                .centerCrop()
+//            .placeholder(R.drawable.loading_spinner)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .into(it)
+        }
+        binding.movieImage.let {
+            Glide
+                .with(requireContext())
+                .load("${Constants.IMAGE_PATH}${movie.posterPath}")
+                .centerCrop()
+//            .placeholder(R.drawable.loading_spinner)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .into(it)
+        }
+
+        binding.movieOverview.text = movie.overview
+        binding.movieGenres.text = movie.genres.joinToString(" | ") { it.name }
+        binding.moviesTotalVotes.text = getString(R.string.total_votes, movie.voteCount.toString())
+        binding.averageVotes.text = getString(R.string.average_votes, movie.voteAverage.toString())
+
     }
 
     override fun onDestroy() {

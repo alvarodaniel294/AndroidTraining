@@ -27,9 +27,11 @@ class MainFragment : Fragment(), MovieListener {
         const val TAG = "MainFragment"
     }
 
-    var _binding:FragmentMainBinding? = null
+    var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
     lateinit var nowPlayingAdapter: HomeMovieAdapter
+    lateinit var upcomingAdapter: HomeMovieAdapter
+    lateinit var topRatedAdapter: HomeMovieAdapter
 
 
     private val viewModel: MainViewModel by hiltNavGraphViewModels(R.id.nav_graph)
@@ -54,11 +56,27 @@ class MainFragment : Fragment(), MovieListener {
         viewModel.getMoviesFromServer(MainViewModelStateEvent.GetMoviesEvent)
         subscribeObservers()
         setupNowPlayingRecycler()
+        setupUpComingRecycler()
+        setupTopRatedRecycler()
+    }
 
+    private fun setupTopRatedRecycler() {
+        binding.topRatedRecycler.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        topRatedAdapter = HomeMovieAdapter(this)
+        binding.topRatedRecycler.adapter = topRatedAdapter
+    }
+
+    private fun setupUpComingRecycler() {
+        binding.upcomingRecycler.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        upcomingAdapter = HomeMovieAdapter(this)
+        binding.upcomingRecycler.adapter = upcomingAdapter
     }
 
     private fun setupNowPlayingRecycler() {
-        binding.nowPlayingRecycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.nowPlayingRecycler.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         nowPlayingAdapter = HomeMovieAdapter(this)
         binding.nowPlayingRecycler.adapter = nowPlayingAdapter
     }
@@ -79,7 +97,40 @@ class MainFragment : Fragment(), MovieListener {
                     Toast.makeText(requireContext(), "loading", Toast.LENGTH_SHORT).show()
                 }
             }
+        })
 
+        viewModel.upcomingMoviesDataState.observe(viewLifecycleOwner, Observer { dataState ->
+            when (dataState) {
+                is DataState.Success<List<MovieStorageEntity>> -> {
+                    dataState.data.forEach { movie ->
+                        Log.d(TAG, movie.title)
+                    }
+                    upcomingAdapter.movies = dataState.data
+                }
+                is DataState.Error -> {
+                    Toast.makeText(requireContext(), "error", Toast.LENGTH_SHORT).show()
+                }
+                is DataState.Loading -> {
+                    Toast.makeText(requireContext(), "loading", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+
+        viewModel.topRatedMoviesDataState.observe(viewLifecycleOwner, Observer { dataState ->
+            when (dataState) {
+                is DataState.Success<List<MovieStorageEntity>> -> {
+                    dataState.data.forEach { movie ->
+                        Log.d(TAG, movie.title)
+                    }
+                    topRatedAdapter.movies = dataState.data
+                }
+                is DataState.Error -> {
+                    Toast.makeText(requireContext(), "error", Toast.LENGTH_SHORT).show()
+                }
+                is DataState.Loading -> {
+                    Toast.makeText(requireContext(), "loading", Toast.LENGTH_SHORT).show()
+                }
+            }
         })
     }
 

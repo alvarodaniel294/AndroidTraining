@@ -4,31 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".UI.home.MovieDetailFragment">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/imageVideo"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/movieTitle"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/imageVideo"
-            android:layout_margin="16dp"
-            tools:text="Title"
-            android:textStyle="bold"
-            style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
-            android:textColor="@color/white"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:paddingBottom="32dp">
+
+            <ImageView
+                android:id="@+id/posterImage"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:src="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/movieTitle"
+                style="@style/MaterialAlertDialog.MaterialComponents.Title.Text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/movieImage"
+                app:layout_constraintTop_toBottomOf="@id/movieImage"
+                tools:text="Title" />
+
+            <ImageView
+                android:id="@+id/movieImage"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="200dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/movieGenres"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@id/movieTitle"
+                app:layout_constraintStart_toStartOf="@id/movieTitle"
+                app:layout_constraintTop_toBottomOf="@id/movieTitle"
+                android:paddingBottom="8dp"
+                tools:text="description" />
+            <TextView
+                android:id="@+id/movieOverview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@id/movieTitle"
+                app:layout_constraintStart_toStartOf="@id/movieTitle"
+                app:layout_constraintTop_toBottomOf="@id/movieGenres"
+                android:layout_marginEnd="80dp"
+                android:justificationMode="inter_word"
+                tools:text="description" />
+            <TextView
+                android:id="@+id/moviesTotalVotes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/movieImage"
+                app:layout_constraintTop_toBottomOf="@id/posterImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="16dp"
+                android:textColor="@color/white"
+                tools:text="asdf"/>
+            <TextView
+                android:id="@+id/averageVotes"
+                android:layout_width="0dp"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/moviesTotalVotes"
+                app:layout_constraintEnd_toEndOf="@id/moviesTotalVotes"
+                app:layout_constraintTop_toBottomOf="@id/moviesTotalVotes"
+                android:layout_marginTop="8dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
 
 </FrameLayout>

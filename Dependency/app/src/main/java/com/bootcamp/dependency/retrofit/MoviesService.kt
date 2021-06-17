@@ -14,4 +14,10 @@ interface MoviesService {
 
     @GET("https://api.themoviedb.org/3/movie/{id}?api_key=63592215c6c623581e3f055bca1bc8a3&language=en-US")
     suspend fun getMovieDetail(@Path ("id") id:Long):Response<MovieDetailResponse>
+
+    @GET("https://api.themoviedb.org/3/movie/upcoming?api_key=63592215c6c623581e3f055bca1bc8a3&language=en-US")
+    suspend fun getUpComingMovies():Response<MoviesResponse>
+
+    @GET("https://api.themoviedb.org/3/movie/top_rated?api_key=63592215c6c623581e3f055bca1bc8a3&language=en-US")
+    suspend fun getTopRatedMovies():Response<MoviesResponse>
 }
