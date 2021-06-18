@@ -18,17 +18,19 @@ class UserViewModel: ViewModel() {
 
     fun getUsers(){
         CoroutineScope(Dispatchers.IO).launch {
-            val call = RetrofitSingleton().getRetrofitInstance()?.create(UserService::class.java).getUsers()
-            val myUsers = call.body()
+            val call = RetrofitSingleton().getRetrofitInstance()?.create(UserService::class.java)?.getUsers()
+            val myUsers = call?.body()
             withContext(Dispatchers.Main){
-                if( call.isSuccessful ){
-                    myUsers.let {
-                        users.postValue(it)
-                        //TODO: insertar a la base de datos
+                if (call != null) {
+                    if( call.isSuccessful ){
+                        myUsers.let {
+                            users.postValue(it)
+                            //TODO: insertar a la base de datos
 
+                        }
+                    }else{
+                        // something bad happened in the server side or not found
                     }
-                }else{
-                    // something bad happened in the server side or not found
                 }
             }
         }
