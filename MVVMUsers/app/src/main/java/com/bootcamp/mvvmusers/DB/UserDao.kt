@@ -1,6 +1,7 @@
 package com.bootcamp.mvvmusers.DB
 
 import androidx.room.*
+import com.bootcamp.mvvmusers.model.User
 
 @Dao
 interface UserDao {
