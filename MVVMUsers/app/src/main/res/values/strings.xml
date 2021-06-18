@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MVVMUsers</string>
+    <string name="load_users">Load Users</string>
+</resources>
