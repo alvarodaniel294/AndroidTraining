@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import com.bootcamp.mvvmusers.DB.entities.UserStorageEntity
 import com.bootcamp.mvvmusers.UI.viewModels.MainViewModel
 import com.bootcamp.mvvmusers.UI.viewModels.MainViewModelStateEvent
 import com.bootcamp.mvvmusers.databinding.ActivityMainBinding
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     private fun subscribeObservers() {
         mainViewModel.usersDataState.observe(this, Observer { dataState ->
             when (dataState) {
-                is DataState.Success<List<User>> -> {
+                is DataState.Success<List<UserStorageEntity>> -> {
                     dataState.data.forEach { user ->
                         Log.d(TAG, user.name)
                     }

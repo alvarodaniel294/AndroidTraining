@@ -1,7 +1,7 @@
 package com.bootcamp.mvvmusers.repository
 
-import android.util.Log
-import com.bootcamp.mvvmusers.model.User
+import com.bootcamp.mvvmusers.DB.dao.UserDao
+import com.bootcamp.mvvmusers.DB.entities.UserStorageEntity
 import com.bootcamp.mvvmusers.retrofit.UsersService
 import com.bootcamp.mvvmusers.utils.DataState
 import kotlinx.coroutines.flow.Flow
@@ -10,23 +10,34 @@ import kotlinx.coroutines.flow.flow
 
 class UsersRepository
 constructor(
-    private val usersService: UsersService
+    private val usersService: UsersService,
+    private val userDao: UserDao
 ) {
-    suspend fun getUsers(): Flow<DataState<List<User>>> = flow {
+    suspend fun getUsers(): Flow<DataState<List<UserStorageEntity>>> = flow {
         emit(DataState.Loading)
 
         try {
-            Log.d("MAIN", "MAIN2")
             val networkUsers = usersService.getAllUsers()
-            Log.d("MAIN", networkUsers.toString())
             if (networkUsers.isSuccessful) {
-                Log.d("MAIN", "MAIN3")
                 networkUsers.body()?.let { response ->
-                    emit(DataState.Success(response))
+                    response.forEach { userResponse ->
+                        val user = UserStorageEntity(
+                            userResponse.id,
+                            userResponse.name,
+                            userResponse.username,
+                            userResponse.email,
+                            userResponse.phone,
+                            userResponse.website
+                        )
+                        userDao.saveUser(user)
+                    }
+                    val moviesFromDB = userDao.getUsers()
+                    emit(DataState.Success(moviesFromDB))
                 }
             }
         }catch (e:Exception){
-            emit(DataState.Error(e))
+            val moviesFromDB = userDao.getUsers()
+            emit(DataState.Success(moviesFromDB))
         }
 
     }.catch { error ->

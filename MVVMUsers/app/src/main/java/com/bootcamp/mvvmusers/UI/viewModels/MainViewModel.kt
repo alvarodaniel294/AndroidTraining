@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bootcamp.mvvmusers.DB.entities.UserStorageEntity
 import com.bootcamp.mvvmusers.model.User
 import com.bootcamp.mvvmusers.repository.UsersRepository
 import com.bootcamp.mvvmusers.utils.DataState
@@ -20,8 +21,8 @@ class MainViewModel
 constructor(
     val repository: UsersRepository
 ):ViewModel() {
-    private val _usersDataState: MutableLiveData<DataState<List<User>>> = MutableLiveData()
-    val usersDataState: LiveData<DataState<List<User>>>
+    private val _usersDataState: MutableLiveData<DataState<List<UserStorageEntity>>> = MutableLiveData()
+    val usersDataState: LiveData<DataState<List<UserStorageEntity>>>
         get() = _usersDataState
 
     fun getUsers(event: MainViewModelStateEvent){
