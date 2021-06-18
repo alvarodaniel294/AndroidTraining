@@ -22,7 +22,7 @@ constructor(
 
     private val _usersDataState:MutableLiveData<DataState<List<UserStorageEntity>>> =
         MutableLiveData()
-    val moviesDataState:LiveData<DataState<List<UserStorageEntity>>>
+    val usersDataState:LiveData<DataState<List<UserStorageEntity>>>
         get() = _usersDataState
 
 
