@@ -20,8 +20,6 @@ constructor(
     val repository: UsersRepository
 ):ViewModel() {
 
-
-
     private val _usersDataState:MutableLiveData<DataState<List<UserStorageEntity>>> =
         MutableLiveData()
     val moviesDataState:LiveData<DataState<List<UserStorageEntity>>>
@@ -40,6 +38,14 @@ constructor(
 
                 }
             }
+        }
+    }
+
+    fun getUsersFromServer() {
+        viewModelScope.launch {
+            repository.getMovies().onEach { dataState ->
+                _usersDataState.value = dataState
+            }.launchIn(viewModelScope)
         }
     }
 }
