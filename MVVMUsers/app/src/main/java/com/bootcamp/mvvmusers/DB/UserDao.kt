@@ -12,7 +12,7 @@ interface UserDao {
     fun loadAllByIds(userIds: IntArray): List<User>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertAll(vararg users: User)
+    fun insertAll(vararg users: List<User>)
 
     @Delete
     fun delete(user: User)

@@ -10,25 +10,4 @@ import com.bootcamp.mvvmusers.model.User
 abstract class UserDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 
-    fun getDatabase2(context: Context): UserDatabase{
-        val db = Room.databaseBuilder(
-            context.applicationContext,
-            UserDatabase::class.java, "database-name"
-        ).build()
-        return db
-    }
-
-    @Volatile
-    private var INSTANCE: UserDatabase? = null
-
-    fun getDatabase(context: Context): UserDatabase {
-        if( INSTANCE == null){
-            INSTANCE = Room.databaseBuilder(
-                context.applicationContext,
-                UserDatabase::class.java,
-                "userdatabase"
-            ).build()
-        }
-        return INSTANCE as UserDatabase
-    }
 }

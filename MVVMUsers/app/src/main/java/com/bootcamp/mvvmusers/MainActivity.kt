@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     var userViewModel = UserViewModel()
+    var app = applicationContext as MvvmUsersApplication
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +22,8 @@ class MainActivity : AppCompatActivity() {
 
     fun initButtonListener(){
         binding.btnLoad.setOnClickListener {
-            // make a request and save it to Database
+            userViewModel.getUsers(this)
+            userViewModel.users.value?.let { it1 -> app.room.userDao().insertAll(it1) }
         }
     }
 
