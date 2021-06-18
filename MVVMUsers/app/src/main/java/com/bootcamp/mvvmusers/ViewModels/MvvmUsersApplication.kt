@@ -1,4 +1,4 @@
-package com.bootcamp.mvvmusers
+package com.bootcamp.mvvmusers.ViewModels
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
