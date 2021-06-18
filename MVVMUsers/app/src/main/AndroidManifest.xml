@@ -3,8 +3,6 @@
     package="com.bootcamp.mvvmusers">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-
     <application
         android:name=".MvvmUsersApplication"
         android:allowBackup="true"
