@@ -5,11 +5,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitSingleton {
 
-    private var retrofit: RetrofitSingleton? = null
+    lateinit var retrofit: Retrofit
 
-    private val BASEURL: String = ""
+    private val BASEURL: String = "https://jsonplaceholder.typicode.com/"
 
-    fun getRetrofitInstance(): RetrofitSingleton{
+    fun getRetrofitInstance(): Retrofit?{
         if( retrofit == null){
             retrofit = Retrofit.Builder()
                 .baseUrl(BASEURL)

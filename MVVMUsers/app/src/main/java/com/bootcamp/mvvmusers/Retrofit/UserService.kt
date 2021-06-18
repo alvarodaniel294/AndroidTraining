@@ -6,7 +6,7 @@ import retrofit2.http.Path
 
 
 interface UserService {
-    @GET("users/")
+    @GET("users")
     suspend fun getUsers(): Response<List<UserApi.UserApiItem>>
 }
 

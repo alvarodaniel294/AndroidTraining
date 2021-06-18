@@ -1,9 +1,6 @@
 package com.bootcamp.mvvmusers.DB
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface UserDao {
@@ -13,7 +10,7 @@ interface UserDao {
     @Query("SELECT * FROM user WHERE uid IN (:userIds)")
     fun loadAllByIds(userIds: IntArray): List<User>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(vararg users: User)
 
     @Delete

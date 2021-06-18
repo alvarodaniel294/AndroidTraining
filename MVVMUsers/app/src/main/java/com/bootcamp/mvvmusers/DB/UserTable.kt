@@ -8,7 +8,7 @@ import com.bootcamp.mvvmusers.model.Company
 
 @Entity
 data class User(
-    @PrimaryKey val uid: Int,
+    @PrimaryKey(autoGenerate = true) val uid: Int,
     @ColumnInfo(name = "name") val name: String?,
     @ColumnInfo(name = "username") val username: String?,
     @ColumnInfo(name = "email") val email: String?,
