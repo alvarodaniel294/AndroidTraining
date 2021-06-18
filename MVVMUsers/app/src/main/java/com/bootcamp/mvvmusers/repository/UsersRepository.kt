@@ -18,10 +18,10 @@ constructor(
         emit(DataState.Loading)
 
         try {
-            val networkMovies = retrofitService.getUsers()
-            if (networkMovies.isSuccessful) {
-                networkMovies.body()?.let { response ->
-                    response.moviesList.forEach { userResponse ->
+            val network = retrofitService.getUsers()
+            if (network.isSuccessful) {
+                network.body()?.let { response ->
+                    response.usersList.forEach { userResponse ->
                         val user = UserStorageEntity(
                             userResponse.id,
                             userResponse.name,
